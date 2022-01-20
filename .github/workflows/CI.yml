@@ -35,40 +35,40 @@ jobs:
             } | Set-Content Directory.Build.props
 
       - name: NuGet restore
-        run: nuget restore WPFUI.sln
+        run: nuget restore Lepo.i18n.sln
 
       - name: Build
-        run: msbuild WPFUI.sln -p:Configuration=Release -m
+        run: msbuild Lepo.i18n.sln -p:Configuration=Release -m
 
       - name: Publish net60
         uses: actions/upload-artifact@v2
         id: publish_net6
         with:
-          name: WPFUI-NET6
+          name: Lepo.i18n-net6
           path: |
-            WPFUI/bin/Release/net6.0-windows
+            Lepo.i18n/bin/Release/net6.0-windows
 
       - name: Publish net50
         uses: actions/upload-artifact@v2
         id: publish_net5
         with:
-          name: WPFUI-NET5
+          name: Lepo.i18n-net5
           path: |
-            WPFUI/bin/Release/net5.0-windows
+            Lepo.i18n/bin/Release/net5.0-windows
 
       - name: Publish net48
         uses: actions/upload-artifact@v2
         with:
-          name: WPFUI-NET48
+          name: Lepo.i18n-net48
           path: |
-            WPFUI/bin/Release/net48
+            Lepo.i18n/bin/Release/net48
 
       - name: Publish nupkg
         uses: actions/upload-artifact@v2
         with:
-          name: WPFUI-NUPKG
+          name: lepo-nupkg
           path: |
-            WPFUI/bin/Release/WPF-UI.*.nupkg
+            Lepo.i18n/bin/Release/Lepo.i18n.*.nupkg
 
       - name: Upload update to NuGet
         uses: rohith/publish-nuget@v2
