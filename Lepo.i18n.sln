@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.0.32014.148
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Lepo.i18n", "Lepo.i18n\Lepo.i18n.csproj", "{FA600754-7612-4089-B114-AB5CAFE289AB}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Lepo.i18n.Demo", "Lepo.i18n.Demo\Lepo.i18n.Demo.csproj", "{2CF0D6DB-53B8-411A-AFDD-73E21606B9AA}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{FA600754-7612-4089-B114-AB5CAFE289AB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FA600754-7612-4089-B114-AB5CAFE289AB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FA600754-7612-4089-B114-AB5CAFE289AB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FA600754-7612-4089-B114-AB5CAFE289AB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2CF0D6DB-53B8-411A-AFDD-73E21606B9AA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2CF0D6DB-53B8-411A-AFDD-73E21606B9AA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2CF0D6DB-53B8-411A-AFDD-73E21606B9AA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2CF0D6DB-53B8-411A-AFDD-73E21606B9AA}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {BF9C3C0B-D0EC-4FA3-A0D5-A8F70572737A}
+	EndGlobalSection
+EndGlobal

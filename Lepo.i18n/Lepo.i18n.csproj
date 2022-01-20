@@ -1,0 +1,20 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+	  <TargetFrameworks>net6.0-windows;net5.0-windows;netcoreapp3.1;net48;net47</TargetFrameworks>
+	  <UseWpf>true</UseWpf>
+	  <OutputType>Library</OutputType>
+	  <AppDesignerFolder>Properties</AppDesignerFolder>
+	  <AllowUnsafeBlocks>false</AllowUnsafeBlocks>
+	  <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+	  <PackageRequireLicenseAcceptance>false</PackageRequireLicenseAcceptance>
+	  <PackageLicenseExpression>MIT</PackageLicenseExpression>
+	  <PackageLicense>https://raw.githubusercontent.com/lepoco/i18n/main/LICENSE</PackageLicense>
+	  <PackageProjectUrl>https://github.com/lepoco/i18n</PackageProjectUrl>
+	  <RepositoryUrl>https://github.com/lepoco/i18n</RepositoryUrl>
+	  <GenerateDocumentationFile>true</GenerateDocumentationFile>
+	  <Deterministic>true</Deterministic>
+	  <LangVersion>latest</LangVersion>
+  </PropertyGroup>
+
+</Project>

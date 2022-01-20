@@ -1,0 +1,30 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <TargetFramework>net6.0-windows</TargetFramework>
+    <Nullable>enable</Nullable>
+    <UseWPF>true</UseWPF>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Remove="Strings\de_DE.yaml" />
+    <None Remove="Strings\en_US.yaml" />
+    <None Remove="Strings\pl_PL.yaml" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="WPF-UI" Version="1.2.2-prerelease120" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Lepo.i18n\Lepo.i18n.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Resource Include="Strings\de_DE.yaml" />
+    <Resource Include="Strings\en_US.yaml" />
+    <Resource Include="Strings\pl_PL.yaml" />
+  </ItemGroup>
+
+</Project>
