@@ -20,8 +20,9 @@
 
         <wpfui:TitleBar Grid.Row="0" ApplicationNavigation="True" />
 
-        <Grid Grid.Row="1" Margin="12,6,12,12">
-            <TextBlock Text="Hello World" />
-        </Grid>
+        <Frame
+            x:Name="RootFrame"
+            Grid.Row="1"
+            Margin="32" />
     </Grid>
 </Window>

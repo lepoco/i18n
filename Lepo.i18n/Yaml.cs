@@ -10,6 +10,9 @@ using System.Text;
 
 namespace Lepo.i18n
 {
+    /// <summary>
+    /// Some weird YAML implementation. Don't ask me, it was supposed to be simple...
+    /// </summary>
     internal class Yaml
     {
         /// <summary>
@@ -20,6 +23,7 @@ namespace Lepo.i18n
         public static uint Map(string value)
         {
             MD5 md5Hasher = MD5.Create();
+
             byte[] hashed = md5Hasher.ComputeHash(Encoding.UTF8.GetBytes(value));
 
             return BitConverter.ToUInt32(hashed, 0);
@@ -28,35 +32,18 @@ namespace Lepo.i18n
         /// <summary>
         /// Creates new collection of mapped keys with translated values.
         /// </summary>
-        /// <param name="path">Path to yaml file.</param>
-        /// <returns></returns>
-        /// <exception cref="NotImplementedException"></exception>
-        public static Dictionary<uint, string> FromPath(string path)
-        {
-            // TODO: Implement search application
-            throw new NotImplementedException("Yaml from path is not yet implemented");
-
-            return new Dictionary<uint, string>() { };
-        }
-
-        /// <summary>
-        /// Creates new collection of mapped keys with translated values.
-        /// </summary>
         /// <param name="yamlContent">String containing Yaml.</param>
-        /// <returns></returns>
-        public static Dictionary<uint, string> FromString(string yamlContent)
+        public static IDictionary<uint, string> FromString(string yamlContent)
         {
             Dictionary<uint, string> keyValueCollection = new() { };
 
             string[] yamlLines = yamlContent.Split(
-                new[] { Environment.NewLine },
+                new[] { "\r\n", "\r", "\n" },
                 StringSplitOptions.None
             );
 
             if (yamlLines.Length < 1)
-            {
                 return keyValueCollection;
-            }
 
             foreach (string yamlLine in yamlLines)
             {

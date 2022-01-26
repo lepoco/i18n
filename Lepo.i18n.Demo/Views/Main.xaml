@@ -1,0 +1,66 @@
+﻿<Page
+    x:Class="Lepo.i18n.Demo.Views.Main"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:i18n="clr-namespace:Lepo.i18n;assembly=Lepo.i18n"
+    xmlns:local="clr-namespace:Lepo.i18n.Demo.Views"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:wpfui="clr-namespace:WPFUI.Controls;assembly=WPFUI"
+    Title="Main"
+    d:DesignHeight="450"
+    d:DesignWidth="800"
+    mc:Ignorable="d">
+
+    <Grid>
+        <StackPanel>
+            <wpfui:CardControl
+                Title="{i18n:Translate String='Languages'}"
+                Margin="0,0,0,8"
+                Icon="LocalLanguage24"
+                Subtitle="{i18n:Translate String='Globalization is progressing, but some people still don\'t enjoy English.'}">
+                <wpfui:Button
+                    Appearance="Secondary"
+                    Click="ButtonBase_OnClick"
+                    Content="{i18n:Translate String='Change language'}" />
+            </wpfui:CardControl>
+
+            <wpfui:CardAction Margin="0,0,0,8" Icon="Globe24">
+                <StackPanel>
+                    <TextBlock
+                        Margin="0,0,0,4"
+                        FontWeight="Medium"
+                        Text="{i18n:Translate String='Hello World'}" />
+                    <TextBlock
+                        FontSize="10"
+                        Foreground="{DynamicResource TextFillColorTertiaryBrush}"
+                        Text="{i18n:Translate String='Just a preview.'}" />
+                </StackPanel>
+            </wpfui:CardAction>
+
+            <wpfui:CardAction Margin="0,0,0,8" Icon="Bug24">
+                <StackPanel>
+                    <TextBlock
+                        Margin="0,0,0,4"
+                        FontWeight="Medium"
+                        Text="{i18n:Translate String='My code never has bugs...'}" />
+                    <TextBlock
+                        FontSize="10"
+                        Foreground="{DynamicResource TextFillColorTertiaryBrush}"
+                        Text="{i18n:Translate String='It just develop random unexpected features.'}" />
+                </StackPanel>
+            </wpfui:CardAction>
+
+            <TextBlock
+                Margin="0,0,0,8"
+                Foreground="{DynamicResource TextFillColorSecondaryBrush}"
+                Text="{i18n:Translate String='And yeah, I stole above joke from Reddit...'}" />
+
+            <wpfui:Hyperlink
+                Margin="0,0,0,4"
+                Content="{i18n:Translate String='Do you like the style of this app? Check WPF UI.'}"
+                Icon="Link48"
+                NavigateUri="https://github.com/lepoco/wpfui" />
+        </StackPanel>
+    </Grid>
+</Page>

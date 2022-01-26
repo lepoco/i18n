@@ -12,7 +12,7 @@ namespace Lepo.i18n
     /// <summary>
     /// Translates text strings using the <c>Convert</c> method
     /// </summary>
-    public sealed class LangConverter : IValueConverter
+    public sealed class TranslateConverter : IValueConverter
     {
         /// <summary>
         /// Translates text strings using the Converter in XAML
@@ -22,9 +22,12 @@ namespace Lepo.i18n
         /// <returns>Translated text string based on the identifier, or only the identifier if the id does not exist</returns>
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            return Translator.String((string?)parameter);
+            return Translator.String((string)parameter);
         }
 
+        /// <summary>
+        /// Throws <see cref="NotSupportedException"/>.
+        /// </summary>
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
         {
             throw new NotSupportedException("ITranslator can only be used for one way conversion.");

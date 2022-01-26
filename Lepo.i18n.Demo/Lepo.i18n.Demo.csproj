@@ -14,7 +14,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="WPF-UI" Version="1.2.2-prerelease129" />
+    <PackageReference Include="WPF-UI" Version="1.2.2-prerelease133" />
   </ItemGroup>
 
   <ItemGroup>
@@ -22,9 +22,9 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Resource Include="Strings\de_DE.yaml" />
-    <Resource Include="Strings\en_US.yaml" />
-    <Resource Include="Strings\pl_PL.yaml" />
+    <EmbeddedResource Include="Strings\de_DE.yaml" />
+    <EmbeddedResource Include="Strings\en_US.yaml" />
+    <EmbeddedResource Include="Strings\pl_PL.yaml" />
   </ItemGroup>
 
 </Project>

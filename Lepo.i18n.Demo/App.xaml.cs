@@ -3,6 +3,7 @@
 // Copyright (C) Leszek Pomianowski and Lepo.i18n Contributors.
 // All Rights Reserved.
 
+using System.Reflection;
 using System.Windows;
 
 namespace Lepo.i18n.Demo
@@ -12,5 +13,11 @@ namespace Lepo.i18n.Demo
     /// </summary>
     public partial class App : Application
     {
+        protected override void OnStartup(StartupEventArgs e)
+        {
+            WPFUI.Theme.Watcher.Start(true, true);
+
+            Translator.SetLanguage(Assembly.GetExecutingAssembly(), "en_US", "Lepo.i18n.Demo.Strings.en_US.yaml");
+        }
     }
 }

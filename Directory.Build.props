@@ -1,6 +1,9 @@
 <Project>
   <PropertyGroup>
-    <Version>0.1.0</Version>
+    <Version>1.0.0</Version>
+    <LangVersion>latest</LangVersion>
+    <Authors>lepo.co</Authors>
+    <Company>lepo.co</Company>
     <Copyright>Copyright C 2021-2022 lepo.co | Leszek Pomianowski</Copyright>
   </PropertyGroup>
 </Project>

@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
 	  <TargetFrameworks>net6.0-windows;net5.0-windows;netcoreapp3.1;net48;net47</TargetFrameworks>
@@ -15,6 +15,16 @@
 	  <GenerateDocumentationFile>true</GenerateDocumentationFile>
 	  <Deterministic>true</Deterministic>
 	  <LangVersion>latest</LangVersion>
+	  <Description>Allows you to conveniently translate Windows applications using YAML files.</Description>
+	  <PackageTags>wpf,translation,i18n,yaml,lepo,widnows,net,net6,multilanguage,package,library,internationalization</PackageTags>
+	  <PackageIcon>lepo.i18n.png</PackageIcon>
   </PropertyGroup>
+
+  <ItemGroup>
+    <None Include="C:\Users\Raven\Desktop\lepo.i18n.png">
+      <Pack>True</Pack>
+      <PackagePath>\</PackagePath>
+    </None>
+  </ItemGroup>
 
 </Project>

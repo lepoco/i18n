@@ -4,91 +4,65 @@
 // All Rights Reserved.
 
 using System.Collections.Generic;
+using System.Reflection;
+using System.Threading.Tasks;
 
 namespace Lepo.i18n
 {
-    // TODO: Refactor
-    public class Translator
+    /// <summary>
+    /// Implements application translation using Yaml files.
+    /// </summary>
+    public static class Translator
     {
-        private string _path = "";
-
-        private string _language = "";
-
-        private string _default = "en_US";
-
-        private Dictionary<string, Dictionary<uint, string>> _translations = new();
-
-        public string Language => _language;
-
-        public string DefaultLanguage => _default;
-
-        public static Translator Instance { get; set; } = null;
+        /// <summary>
+        /// Returns the currently used language.
+        /// </summary>
+        public static string Current => TranslationStorage.CurrentLanguage ?? "";
 
         /// <summary>
-        /// Creates new instance of <see cref="Translator"/> and sets it's <see cref="Instance"/>.
+        /// Defines the currently used language of the application. By itself, it does not update rendered views.
         /// </summary>
-        public Translator()
+        /// <param name="applicationAssembly">Main application <see cref="Assembly"/>. You can use <see cref="Assembly.GetExecutingAssembly"/></param>
+        /// <param name="language">The language code to which you would like to assign the selected file. i.e: <i>pl_PL</i></param>
+        /// <param name="embeddedResourcePath">Path to the YAML file, i.e: <i>MyApp.Assets.Strings.pl_PL.yaml</i></param>
+        /// <param name="reload">If the file was previously loaded, it will be reloaded.</param>
+        public static bool SetLanguage(Assembly applicationAssembly, string language, string embeddedResourcePath, bool reload = false)
         {
-            Instance = this;
-        }
+            language = language.Trim();
 
-        /// <summary>
-        /// Defines default language.
-        /// </summary>
-        /// <param name="defaultLanguage">ISO language code <para><c>eg. en_US</c>.</para></param>
-        public void SetDefault(string defaultLanguage)
-        {
-            _default = defaultLanguage;
-        }
+            // We update the language even if we do not change it, because the user may not know what is not working.
+            TranslationStorage.CurrentLanguage = language;
 
-        /// <summary>
-        /// Defines current language.
-        /// </summary>
-        /// <param name="language">ISO language code <para><c>eg. en_US</c>.</para></param>
-        public void SetLanguage(string language)
-        {
-            _language = language;
-        }
+            var languageDictionary = AssemblyLoader.TryLoad(applicationAssembly, embeddedResourcePath);
 
-        /// <summary>
-        /// Defines path in which the strings are located.
-        /// </summary>
-        /// <param name="pathToStrings"></param>
-        public void SetStringsPath(string pathToStrings)
-        {
-            if (!pathToStrings.EndsWith("/"))
-                pathToStrings += "/";
+            if (languageDictionary == null)
+                return false;
 
-            _path = pathToStrings;
-        }
+            TranslationStorage.TranslationsDictionary ??= new Dictionary<string, IDictionary<uint, string>>();
 
-        /// <summary>
-        /// Load language from string containing YAML.
-        /// </summary>
-        /// <param name="language"></param>
-        public void LoadLanguage(string language)
-        {
-            _language = language;
-
-            if (!_translations.ContainsKey(language))
+            if (!TranslationStorage.TranslationsDictionary.ContainsKey(language))
             {
-                _translations.Add(language, Yaml.FromPath(_path + language + ".yaml"));
+                TranslationStorage.TranslationsDictionary.Add(language, languageDictionary);
+
+                return true;
             }
+
+            if (TranslationStorage.TranslationsDictionary.ContainsKey(language) && reload)
+                TranslationStorage.TranslationsDictionary[language] = languageDictionary;
+
+            return true;
         }
 
         /// <summary>
-        /// Load language from path to file containing YAML.
+        /// Defines the currently used language of the application. By itself, it does not update rendered views.
         /// </summary>
-        /// <param name="language"></param>
-        /// <param name="yamlFileContent"></param>
-        public void LoadFromFile(string language, string yamlFileContent)
+        /// <param name="applicationAssembly">Main application <see cref="Assembly"/>. You can use <see cref="Assembly.GetExecutingAssembly"/></param>
+        /// <param name="language">The language code to which you would like to assign the selected file. i.e: <i>pl_PL</i></param>
+        /// <param name="embeddedResourcePath">Path to the YAML file, i.e: <i>MyApp.Assets.Strings.pl_PL.yaml</i></param>
+        /// <param name="reload">If the file was previously loaded, it will be reloaded.</param>
+        public static async Task<bool> SetLanguageAsync(Assembly applicationAssembly, string language, string embeddedResourcePath, bool reload = false)
         {
-            _language = language;
-
-            if (!_translations.ContainsKey(language))
-            {
-                _translations.Add(language, Yaml.FromString(yamlFileContent));
-            }
+            return await Task.Run<bool>(() => SetLanguage(applicationAssembly, language, embeddedResourcePath, reload));
         }
 
         /// <summary>
@@ -97,28 +71,30 @@ namespace Lepo.i18n
         /// <param name="text">Text to be translated.</param>
         /// <param name="replace">Replaces <c>%s</c> with provided value.</param>
         /// <returns></returns>
-        public static string String(string? text, string? replace = null)
+        public static string String(string text, string replace = null)
         {
             if (string.IsNullOrEmpty(text))
-                return "i18n.error.null";
-
-            // Needed for XAML preview
-            if (Instance == null)
-                return text;
+                return "i18n.error.nullInput";
 
             if (System.String.IsNullOrEmpty(replace))
-                return Instance.FirstOrDefault(text);
+                return Translator.FirstOrDefault(text);
 
-            return Instance.FirstOrDefault(text).Replace("%s", replace);
+            return Translator.FirstOrDefault(text).Replace("%s", replace);
         }
 
-        internal string FirstOrDefault(string key)
+        internal static string FirstOrDefault(string key)
         {
+            if (TranslationStorage.TranslationsDictionary == null)
+                return "i18n.error.dictionaryNull";
+
+            if (TranslationStorage.CurrentLanguage == null)
+                return "i18n.error.languageNull";
+
             key = key.Trim();
 
             uint mappedKey = Yaml.Map(key);
 
-            if (!_translations.ContainsKey(_language))
+            if (!TranslationStorage.TranslationsDictionary.ContainsKey(TranslationStorage.CurrentLanguage))
             {
 #if DEBUG
                 return "i18n.(" + key + ")";
@@ -128,7 +104,7 @@ namespace Lepo.i18n
             }
 
 
-            if (!_translations[_language].ContainsKey(mappedKey))
+            if (!TranslationStorage.TranslationsDictionary[TranslationStorage.CurrentLanguage].ContainsKey(mappedKey))
             {
 #if DEBUG
                 return "i18n.(" + key + ")";
@@ -137,7 +113,7 @@ namespace Lepo.i18n
 #endif
             }
 
-            return _translations[_language][mappedKey];
+            return TranslationStorage.TranslationsDictionary[TranslationStorage.CurrentLanguage][mappedKey];
         }
     }
 }
