@@ -7,6 +7,11 @@ Convenient app translation.
 # How to use?
 - Install [Lepo.i18n](https://www.nuget.org/packages/lepo.i18n/) library via NuGet.  
 - Add translation files to your application, e.g. `Strings/pl_PL.yaml`, and mark them as embedded resource.
+```xml
+<ItemGroup>
+  <EmbeddedResource Include="Strings\pl_PL.yaml" />
+</ItemGroup>
+```
 - Add translations to these files  
 
 **using direct phrases**
