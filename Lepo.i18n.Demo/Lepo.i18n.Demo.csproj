@@ -5,12 +5,17 @@
     <TargetFramework>net6.0-windows</TargetFramework>
     <Nullable>enable</Nullable>
     <UseWPF>true</UseWPF>
+    <ApplicationIcon>lepo_i18n.ico</ApplicationIcon>
   </PropertyGroup>
 
   <ItemGroup>
     <None Remove="Strings\de_DE.yaml" />
     <None Remove="Strings\en_US.yaml" />
     <None Remove="Strings\pl_PL.yaml" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Include="lepo_i18n.ico" />
   </ItemGroup>
 
   <ItemGroup>
