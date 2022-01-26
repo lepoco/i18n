@@ -14,7 +14,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="WPF-UI" Version="1.2.2-prerelease129" />
+    <PackageReference Include="WPF-UI" Version="1.2.2-prerelease133" />
   </ItemGroup>
 
   <ItemGroup>
