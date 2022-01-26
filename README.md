@@ -6,7 +6,7 @@ Convenient app translation.
 
 # How to use?
 - Install library via NuGet.  
-![image](https://user-images.githubusercontent.com/13592821/151098779-baf50640-841c-40ef-834c-9168b64eb809.png)
+![NuGet package image](https://user-images.githubusercontent.com/13592821/151101238-3ce0591b-5b9c-4c02-9c82-43854fc7d442.png)
 
 
 - Add translation files to your application, e.g. `Strings/pl_PL.yaml`, and mark them as embedded resource.
