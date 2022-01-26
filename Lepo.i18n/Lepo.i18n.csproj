@@ -1,30 +1,31 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
-  <PropertyGroup>
-	  <TargetFrameworks>net6.0-windows;net5.0-windows;netcoreapp3.1;net48;net47</TargetFrameworks>
-	  <UseWpf>true</UseWpf>
-	  <OutputType>Library</OutputType>
-	  <AppDesignerFolder>Properties</AppDesignerFolder>
-	  <AllowUnsafeBlocks>false</AllowUnsafeBlocks>
-	  <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
-	  <PackageRequireLicenseAcceptance>false</PackageRequireLicenseAcceptance>
-	  <PackageLicenseExpression>MIT</PackageLicenseExpression>
-	  <PackageLicense>https://raw.githubusercontent.com/lepoco/i18n/main/LICENSE</PackageLicense>
-	  <PackageProjectUrl>https://github.com/lepoco/i18n</PackageProjectUrl>
-	  <RepositoryUrl>https://github.com/lepoco/i18n</RepositoryUrl>
-	  <GenerateDocumentationFile>true</GenerateDocumentationFile>
-	  <Deterministic>true</Deterministic>
-	  <LangVersion>latest</LangVersion>
-	  <Description>Allows you to conveniently translate Windows applications using YAML files.</Description>
-	  <PackageTags>wpf,translation,i18n,yaml,lepo,widnows,net,net6,multilanguage,package,library,internationalization</PackageTags>
-	  <PackageIcon>lepo.i18n.png</PackageIcon>
-  </PropertyGroup>
+	<PropertyGroup>
+		<TargetFrameworks>net6.0-windows;net5.0-windows;netcoreapp3.1;net48;net47</TargetFrameworks>
+		<UseWpf>true</UseWpf>
+		<OutputType>Library</OutputType>
+		<AppDesignerFolder>Properties</AppDesignerFolder>
+		<AllowUnsafeBlocks>false</AllowUnsafeBlocks>
+		<GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+		<PackageRequireLicenseAcceptance>false</PackageRequireLicenseAcceptance>
+		<PackageLicenseExpression>MIT</PackageLicenseExpression>
+		<PackageLicense>https://raw.githubusercontent.com/lepoco/i18n/main/LICENSE</PackageLicense>
+		<PackageProjectUrl>https://github.com/lepoco/i18n</PackageProjectUrl>
+		<RepositoryUrl>https://github.com/lepoco/i18n</RepositoryUrl>
+		<GenerateDocumentationFile>true</GenerateDocumentationFile>
+		<Deterministic>true</Deterministic>
+		<LangVersion>latest</LangVersion>
+		<Description>Allows you to conveniently translate Windows applications using YAML files.</Description>
+		<PackageTags>wpf,translation,i18n,yaml,lepo,widnows,net,net6,multilanguage,package,library,internationalization</PackageTags>
+		<PackageIcon>lepo.i18n.png</PackageIcon>
+		<PackageVersion>$(Version)</PackageVersion>
+	</PropertyGroup>
 
-  <ItemGroup>
-    <None Include="C:\Users\Raven\Desktop\lepo.i18n.png">
-      <Pack>True</Pack>
-      <PackagePath>\</PackagePath>
-    </None>
-  </ItemGroup>
+	<ItemGroup>
+		<None Include="..\lepo.i18n.png">
+			<Pack>True</Pack>
+			<PackagePath></PackagePath>
+		</None>
+	</ItemGroup>
 
 </Project>
