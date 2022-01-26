@@ -5,15 +5,27 @@ Convenient app translation.
 [![GitHub license](https://img.shields.io/github/license/lepoco/i18n)](https://github.com/lepoco/i18n/blob/master/LICENSE) [![Nuget](https://img.shields.io/nuget/v/lepo.i18n)](https://www.nuget.org/packages/lepo.i18n/) [![Nuget (with prereleases)](https://img.shields.io/nuget/vpre/lepo.i18n?label=nuget-pre)](https://www.nuget.org/packages/lepo.i18n/) [![Nuget](https://img.shields.io/nuget/dt/lepo.i18n?label=nuget-downloads)](https://www.nuget.org/packages/lepo.i18n/) [![Size](https://img.shields.io/github/repo-size/lepoco/i18n)](https://github.com/lepoco/i18n) [![Sponsors](https://img.shields.io/github/sponsors/lepoco)](https://github.com/sponsors/lepoco)
 
 # How to use?
-- Install library via NuGet.  
-![NuGet package image](https://user-images.githubusercontent.com/13592821/151101238-3ce0591b-5b9c-4c02-9c82-43854fc7d442.png)
-
-
+- Install [Lepo.i18n](https://www.nuget.org/packages/lepo.i18n/) library via NuGet.  
 - Add translation files to your application, e.g. `Strings/pl_PL.yaml`, and mark them as embedded resource.
+- Add translations to these files  
+
+**using direct phrases**
+```yaml
+Hello World: Witaj Świecie
+```
+
+**or keys**
+```yaml
+main.view.wellcome: Hello World
+```
 
 - Register selected language
 ```c#
-Lepo.i18n.Translator.SetLanguage(Assembly.GetExecutingAssembly(), "pl_PL", "Lepo.i18n.Demo.Strings.pl_PL.yaml");
+Lepo.i18n.Translator.SetLanguage(
+  Assembly.GetExecutingAssembly(),
+  "pl_PL",
+  "Lepo.i18n.Demo.Strings.pl_PL.yaml"
+);
 ```
 
 - Add a library reference in your XAML and start translating.
