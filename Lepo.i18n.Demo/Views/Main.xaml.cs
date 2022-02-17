@@ -1,5 +1,4 @@
-﻿using System.Reflection;
-using System.Windows;
+﻿using System.Windows;
 using System.Windows.Controls;
 
 namespace Lepo.i18n.Demo.Views
@@ -16,20 +15,22 @@ namespace Lepo.i18n.Demo.Views
             InitializeComponent();
         }
 
-        private void ButtonBase_OnClick(object sender, RoutedEventArgs e)
+        private async void ButtonBase_OnClick(object sender, RoutedEventArgs e)
         {
+            // The languages were loaded in the App class OnStartup method.
+
             switch (Translator.Current)
             {
                 case "pl_PL":
-                    Translator.SetLanguage(Assembly.GetExecutingAssembly(), "de_DE", "Lepo.i18n.Demo.Strings.de_DE.yaml");
+                    await Translator.SetLanguageAsync("de_DE");
                     break;
 
                 case "de_DE":
-                    Translator.SetLanguage(Assembly.GetExecutingAssembly(), "en_US", "Lepo.i18n.Demo.Strings.en_US.yaml");
+                    await Translator.SetLanguageAsync("en_US");
                     break;
 
                 default:
-                    Translator.SetLanguage(Assembly.GetExecutingAssembly(), "pl_PL", "Lepo.i18n.Demo.Strings.pl_PL.yaml");
+                    await Translator.SetLanguageAsync("pl_PL");
                     break;
             }
 

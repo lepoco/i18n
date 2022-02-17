@@ -16,36 +16,45 @@ namespace Lepo.i18n
     internal class Yaml
     {
         /// <summary>
+        /// Used to calculate a simple hash of a key in a dictionary to make searches faster.
+        /// </summary>
+        private static readonly MD5 Hasher = MD5.Create();
+
+        /// <summary>
         /// Creates a hashed <see langword="int"/> representation of <see langword="string"/>.
         /// </summary>
         /// <param name="value">Value to be hashed.</param>
         /// <returns></returns>
         public static uint Map(string value)
         {
-            MD5 md5Hasher = MD5.Create();
-
-            byte[] hashed = md5Hasher.ComputeHash(Encoding.UTF8.GetBytes(value));
-
-            return BitConverter.ToUInt32(hashed, 0);
+            return BitConverter.ToUInt32(
+                Hasher.ComputeHash(Encoding.UTF8.GetBytes(value)),
+                0
+            );
         }
 
         /// <summary>
         /// Creates new collection of mapped keys with translated values.
         /// </summary>
-        /// <param name="yamlContent">String containing Yaml.</param>
-        public static IDictionary<uint, string> FromString(string yamlContent)
+        /// <param name="rawYamlContent">String containing Yaml.</param>
+        public static IDictionary<uint, string> FromString(string rawYamlContent)
         {
             Dictionary<uint, string> keyValueCollection = new() { };
 
-            string[] yamlLines = yamlContent.Split(
+            if (String.IsNullOrEmpty(rawYamlContent))
+                return keyValueCollection;
+
+            string[] splittedYamlLines = rawYamlContent.Split(
                 new[] { "\r\n", "\r", "\n" },
                 StringSplitOptions.None
             );
 
-            if (yamlLines.Length < 1)
+            // TODO: Recognize tab stops as subsections
+
+            if (splittedYamlLines.Length < 1)
                 return keyValueCollection;
 
-            foreach (string yamlLine in yamlLines)
+            foreach (string yamlLine in splittedYamlLines)
             {
                 if (yamlLine.StartsWith("#") || String.IsNullOrEmpty(yamlLine))
                     continue;

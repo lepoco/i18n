@@ -73,7 +73,7 @@ jobs:
       - name: Upload update to NuGet
         uses: rohith/publish-nuget@v2
         with:
-          PROJECT_FILE_PATH: WPFUI/WPFUI.csproj
+          PROJECT_FILE_PATH: Lepo.i18n/Lepo.i18n.csproj
           VERSION_FILE_PATH: Directory.Build.props
           NUGET_KEY: ${{secrets.NUGET_API_KEY}}
           INCLUDE_SYMBOLS: false

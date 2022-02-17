@@ -3,6 +3,7 @@
 // Copyright (C) Leszek Pomianowski and Lepo.i18n Contributors.
 // All Rights Reserved.
 
+using System.Collections.Generic;
 using System.Reflection;
 using System.Windows;
 
@@ -17,7 +18,19 @@ namespace Lepo.i18n.Demo
         {
             WPFUI.Theme.Watcher.Start(true, true);
 
-            Translator.SetLanguage(Assembly.GetExecutingAssembly(), "en_US", "Lepo.i18n.Demo.Strings.en_US.yaml");
+            var langPath = "Lepo.i18n.Demo.Strings.";
+
+            Translator.LoadLanguages(
+                Assembly.GetExecutingAssembly(),
+                new Dictionary<string, string>
+                {
+                    {"en_US", langPath + "en_US.yaml"},
+                    {"pl_PL", langPath + "pl_PL.yaml"},
+                    {"de_DE", langPath + "de_DE.yaml"},
+                }
+            );
+
+            Translator.SetLanguage("en_US");
         }
     }
 }

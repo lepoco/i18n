@@ -35,7 +35,7 @@ namespace Lepo.i18n
             return markupedText
                 .Trim()
                 .Replace("&apos;", "\'")
-                .Replace("	&quot;", "\"")
+                .Replace("&quot;", "\"")
                 .Replace("&lt;", "<")
                 .Replace("&gt;", ">")
                 .Replace("&amp;", "&");

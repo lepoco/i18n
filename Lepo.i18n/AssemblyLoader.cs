@@ -23,7 +23,8 @@ namespace Lepo.i18n
         /// <exception cref="ArgumentException"></exception>
         public static IDictionary<uint, string> TryLoad(Assembly applicationAssembly, string resourceStreamPath)
         {
-            if (!resourceStreamPath.EndsWith(".yaml"))
+            var lowerResourcePath = resourceStreamPath.ToLower().Trim();
+            if (!(lowerResourcePath.EndsWith(".yml") || lowerResourcePath.EndsWith(".yaml")))
                 throw new ArgumentException(
                     $"Parameter {nameof(resourceStreamPath)} in {nameof(TryLoad)} must be path to the YAML file.");
 
