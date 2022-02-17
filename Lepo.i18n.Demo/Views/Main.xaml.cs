@@ -8,11 +8,26 @@ namespace Lepo.i18n.Demo.Views
     /// </summary>
     public partial class Main : Page
     {
+        public string TranslatedTextPreparedInBackend { get; set; }
+
+        public int CatsCount { get; set; }
+
         public Main()
         {
             // We need to use a page if we want to reload it.
 
             InitializeComponent();
+
+            CatsCount = 2;
+
+            TranslatedTextPreparedInBackend = Translator.Prepare(
+                "home.multiplePrepare",
+                Translator.String("home.multiplePrepare.inside"),
+                88,
+                512.55d
+            );
+
+            DataContext = this;
         }
 
         private async void ButtonBase_OnClick(object sender, RoutedEventArgs e)

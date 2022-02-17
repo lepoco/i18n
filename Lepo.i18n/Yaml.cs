@@ -66,8 +66,13 @@ namespace Lepo.i18n
 
                 uint mappedKey = Map(pair[0].Trim());
 
+                var translatedValue = pair[1].Trim();
+
+                if (translatedValue.StartsWith("'") && translatedValue.EndsWith("'") || translatedValue.StartsWith("\"") && translatedValue.EndsWith("\""))
+                    translatedValue = translatedValue.Substring(1, translatedValue.Length - 2);
+
                 if (!keyValueCollection.ContainsKey(mappedKey))
-                    keyValueCollection.Add(mappedKey, pair[1].Trim());
+                    keyValueCollection.Add(mappedKey, translatedValue);
             }
 
             return keyValueCollection;

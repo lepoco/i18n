@@ -11,18 +11,21 @@
     d:DesignHeight="450"
     d:DesignWidth="800"
     mc:Ignorable="d">
+    <Page.Resources>
+        <i18n:TranslateConverter x:Key="TranslateConverter" />
+    </Page.Resources>
 
     <Grid>
         <StackPanel>
             <wpfui:CardControl
-                Title="{i18n:Translate String='Languages'}"
+                Title="{i18n:Translate String='main.languages'}"
                 Margin="0,0,0,8"
                 Icon="LocalLanguage24"
-                Subtitle="{i18n:Translate String='Globalization is progressing, but some people still don\'t enjoy English.'}">
+                Subtitle="{i18n:Translate String='main.globalization'}">
                 <wpfui:Button
                     Appearance="Secondary"
                     Click="ButtonBase_OnClick"
-                    Content="{i18n:Translate String='Change language'}" />
+                    Content="{i18n:Translate String='main.changeLanguage'}" />
             </wpfui:CardControl>
 
             <wpfui:CardAction Margin="0,0,0,8" Icon="Globe24">
@@ -30,11 +33,11 @@
                     <TextBlock
                         Margin="0,0,0,4"
                         FontWeight="Medium"
-                        Text="{i18n:Translate String='Hello World'}" />
+                        Text="{i18n:Translate String='main.hello'}" />
                     <TextBlock
                         FontSize="10"
                         Foreground="{DynamicResource TextFillColorTertiaryBrush}"
-                        Text="{i18n:Translate String='Just a preview.'}" />
+                        Text="{i18n:Translate String='main.preview'}" />
                 </StackPanel>
             </wpfui:CardAction>
 
@@ -43,22 +46,36 @@
                     <TextBlock
                         Margin="0,0,0,4"
                         FontWeight="Medium"
-                        Text="{i18n:Translate String='My code never has bugs...'}" />
+                        Text="{i18n:Translate String='main.myCode'}" />
                     <TextBlock
                         FontSize="10"
                         Foreground="{DynamicResource TextFillColorTertiaryBrush}"
-                        Text="{i18n:Translate String='It just develop random unexpected features.'}" />
+                        Text="{i18n:Translate String='main.randomFeatures'}" />
                 </StackPanel>
             </wpfui:CardAction>
 
             <TextBlock
                 Margin="0,0,0,8"
                 Foreground="{DynamicResource TextFillColorSecondaryBrush}"
-                Text="{i18n:Translate String='And yeah, I stole above joke from Reddit...'}" />
+                Text="{i18n:Translate String='main.reddit'}" />
+
+            <StackPanel Margin="0,0,0,8" Orientation="Horizontal">
+                <wpfui:Badge Appearance="Success" Content="{i18n:Translate String='house.single', Plural='house.plural', Number=2}" />
+
+                <wpfui:Badge
+                    Margin="4,0,0,0"
+                    Appearance="Danger"
+                    Content="{Binding TranslatedTextPreparedInBackend, Mode=OneWay}" />
+
+                <wpfui:Badge
+                    Margin="4,0,0,0"
+                    Appearance="Primary"
+                    Content="{Binding CatsCount, ConverterParameter='main.forConverter', Converter={StaticResource TranslateConverter}}" />
+            </StackPanel>
 
             <wpfui:Hyperlink
                 Margin="0,0,0,4"
-                Content="{i18n:Translate String='Do you like the style of this app? Check WPF UI.'}"
+                Content="{i18n:Translate String='main.checkWpf'}"
                 Icon="Link48"
                 NavigateUri="https://github.com/lepoco/wpfui" />
         </StackPanel>

@@ -13,9 +13,19 @@ namespace Lepo.i18n
     public class TranslateExtension : MarkupExtension
     {
         /// <summary>
-        /// Word to be translated.
+        /// Word or key to be translated.
         /// </summary>
         public string String { get; set; }
+
+        /// <summary>
+        /// If the given <see cref="Number"/> is less than one the <see cref="String"/> will be used, if greater than one - the <see cref="Plural"/> version will be used.
+        /// </summary>
+        public string Plural { get; set; }
+
+        /// <summary>
+        /// The number that is used to determine whether we are using <see cref="Plural"/> or <see cref="String"/>. Can also be used for <see cref="Translator.Prepare"/>.
+        /// </summary>
+        public object Number { get; set; }
 
         /// <summary>
         /// Overridden method, returns the source and path to bind to
@@ -26,6 +36,9 @@ namespace Lepo.i18n
         {
             if (System.String.IsNullOrEmpty(String))
                 return System.String.Empty;
+
+            if (!System.String.IsNullOrEmpty(String) && !System.String.IsNullOrEmpty(Plural) && Number != null)
+                return Translator.Plural(FixSpecialCharacters(String), FixSpecialCharacters(Plural), Number);
 
             return Translator.String(FixSpecialCharacters(String));
         }

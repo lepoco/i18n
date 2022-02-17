@@ -1,0 +1,21 @@
+﻿# Comment
+main.languages: Sprachen
+main.globalization: Die Globalisierung schreitet voran, aber manche Menschen mögen Englisch immer noch nicht.
+main.changeLanguage: Sprache ändern
+main.hello: Hallo Welt
+main.preview: Nur eine Vorschau.
+main.myCode: Mein Code hat nie Fehler ...
+main.randomFeatures: Es entwickelt nur zufällige unerwartete Funktionen.
+main.reddit: Und ja, ich habe den obigen Witz von Reddit geklaut...
+main.checkWpf: Gefällt Ihnen der Stil dieser App? Überprüfen Sie die WPF-UI.
+
+main.forConverter: Mein Freund hat %s Katzen.
+
+# The value may or may not be in parentheses
+house.single: '%i Haus'
+house.plural: '%i Häuser'
+
+main.empty:
+
+home.multiplePrepare: 'Diesen Monat habe ich %s aus dem Tierheim genommen. Ich gab auch %ikg Tierfutter und € %d.'
+home.multiplePrepare.inside: Hund

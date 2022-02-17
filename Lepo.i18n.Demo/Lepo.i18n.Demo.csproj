@@ -9,9 +9,9 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <None Remove="Strings\de_DE.yaml" />
-    <None Remove="Strings\en_US.yaml" />
-    <None Remove="Strings\pl_PL.yaml" />
+    <None Remove="Strings\de_DE.yml" />
+    <None Remove="Strings\en_US.yml" />
+    <None Remove="Strings\pl_PL.yml" />
   </ItemGroup>
 
   <ItemGroup>
@@ -27,9 +27,9 @@
   </ItemGroup>
 
   <ItemGroup>
-    <EmbeddedResource Include="Strings\de_DE.yaml" />
-    <EmbeddedResource Include="Strings\en_US.yaml" />
-    <EmbeddedResource Include="Strings\pl_PL.yaml" />
+    <EmbeddedResource Include="Strings\de_DE.yml" />
+    <EmbeddedResource Include="Strings\en_US.yml" />
+    <EmbeddedResource Include="Strings\pl_PL.yml" />
   </ItemGroup>
 
 </Project>

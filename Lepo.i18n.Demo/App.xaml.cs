@@ -24,9 +24,9 @@ namespace Lepo.i18n.Demo
                 Assembly.GetExecutingAssembly(),
                 new Dictionary<string, string>
                 {
-                    {"en_US", langPath + "en_US.yaml"},
-                    {"pl_PL", langPath + "pl_PL.yaml"},
-                    {"de_DE", langPath + "de_DE.yaml"},
+                    {"en_US", langPath + "en_US.yml"},
+                    {"pl_PL", langPath + "pl_PL.yml"},
+                    {"de_DE", langPath + "de_DE.yml"},
                 }
             );
 

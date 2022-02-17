@@ -18,7 +18,8 @@ namespace Lepo.i18n
         /// <summary>
         /// Try to get dictionary from YAML file located in <see cref="System.Windows.Application"/> resources.
         /// </summary>
-        /// <param name="resourceStreamPath"></param>
+        /// <param name="applicationAssembly">Assembly of the main application.</param>
+        /// <param name="resourceStreamPath">Path to the application resource.</param>
         /// <returns></returns>
         /// <exception cref="ArgumentException"></exception>
         public static IDictionary<uint, string> TryLoad(Assembly applicationAssembly, string resourceStreamPath)
@@ -31,7 +32,12 @@ namespace Lepo.i18n
             using Stream stream = applicationAssembly.GetManifestResourceStream(resourceStreamPath);
 
             if (stream == null)
+            {
+                System.Diagnostics.Debug.WriteLine($"ERROR | Could not load path {resourceStreamPath}, the file probably does not exist.", "Lepo.i18n");
+
                 return null;
+            }
+
 
             using StreamReader reader = new StreamReader(stream);
 

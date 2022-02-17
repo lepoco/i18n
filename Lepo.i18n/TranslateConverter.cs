@@ -17,12 +17,14 @@ namespace Lepo.i18n
         /// <summary>
         /// Translates text strings using the Converter in XAML
         /// </summary>
-        /// <param name="value">ID of the translated text</param>
-        /// <param name="targetType">The format that will be returned, usually a string</param>
+        /// <param name="value">Binded value to be replaced via <see cref="Translator.Prepare"/></param>
+        /// <param name="targetType">Target type.</param>
+        /// <param name="parameter">Word or key of the translated string.</param>
+        /// <param name="culture">Culture information.</param>
         /// <returns>Translated text string based on the identifier, or only the identifier if the id does not exist</returns>
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            return Translator.String((string)parameter);
+            return value == null ? Translator.String((string)parameter ?? "") : Translator.Prepare((string)parameter ?? "", value);
         }
 
         /// <summary>
