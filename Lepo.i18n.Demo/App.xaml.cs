@@ -25,8 +25,7 @@ namespace Lepo.i18n.Demo
                 new Dictionary<string, string>
                 {
                     {"en_US", langPath + "en_US.yml"},
-                    {"pl_PL", langPath + "pl_PL.yml"},
-                    {"de_DE", langPath + "de_DE.yml"},
+                    {"pl_PL", langPath + "pl_PL.yml"}
                 }
             );
 

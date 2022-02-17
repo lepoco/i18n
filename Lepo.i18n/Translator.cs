@@ -18,6 +18,11 @@ namespace Lepo.i18n
     public static class Translator
     {
         /// <summary>
+        /// Pattern used when looking for replacement keys in the translated string.
+        /// </summary>
+        private static readonly string PreparePattern = /* language=regex */ "[%]+[s|i|f|d]";
+
+        /// <summary>
         /// Returns the currently used language.
         /// </summary>
         public static string Current => TranslationStorage.CurrentLanguage ?? "";
@@ -166,7 +171,6 @@ namespace Lepo.i18n
                 return "i18n.error.nullInput";
             }
 
-
             return Translator.FirstOrDefault(textOrKey);
         }
 
@@ -191,11 +195,10 @@ namespace Lepo.i18n
 
             var parameterIndex = 0;
             var indexOffset = 0;
-            var pattern = /* language=regex */ "[%]+[s|i|f|d]";
 
             // TODO: It's experimental
 
-            foreach (Match match in Regex.Matches(translatedString, pattern))
+            foreach (Match match in Regex.Matches(translatedString, PreparePattern))
             {
                 if (parameters.Length < parameterIndex + 1)
                     break;
@@ -235,7 +238,7 @@ namespace Lepo.i18n
                 translatedString = translatedString.Remove(match.Index + indexOffset, 2).Insert(match.Index + indexOffset, embeddedString);
 
                 // As we edit a string on the fly, we need to take into account that it changes.
-                indexOffset += CalcAddedOffset(embeddedString);
+                indexOffset += embeddedString.Length - 2;
 
                 // Update parameter index from method attributes
                 parameterIndex++;
@@ -260,7 +263,8 @@ namespace Lepo.i18n
                 return "i18n.error.nullInput";
             }
 
-            var isPlural = (number.ToString() ?? "0").All(char.IsDigit) && Int32.Parse(number.ToString() ?? "0") > 1;
+            // TODO: It's bad...
+            var isPlural = (number.ToString() ?? "0").All(char.IsDigit) && Int32.Parse(number.ToString() ?? "0") != 1;
 
             return isPlural ? Prepare(plural, number) : Prepare(single, number);
         }
@@ -275,7 +279,7 @@ namespace Lepo.i18n
 
             key = key.Trim();
 
-            uint mappedKey = Yaml.Map(key);
+            var mappedKey = Yaml.Map(key);
 
             if (!TranslationStorage.TranslationsDictionary.ContainsKey(TranslationStorage.CurrentLanguage))
             {
@@ -297,25 +301,6 @@ namespace Lepo.i18n
             }
 
             return TranslationStorage.TranslationsDictionary[TranslationStorage.CurrentLanguage][mappedKey];
-        }
-
-        /// <summary>
-        /// Adds an offset to the two-letter translation key.
-        /// </summary>
-        /// <param name="input"></param>
-        /// <returns></returns>
-        internal static int CalcAddedOffset(string input)
-        {
-            if (input.Length == 0)
-                return -2;
-
-            if (input.Length == 1)
-                return -1;
-
-            if (input.Length == 2)
-                return 0;
-
-            return input.Length - 2;
         }
     }
 }

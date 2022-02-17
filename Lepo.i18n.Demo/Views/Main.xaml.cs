@@ -1,4 +1,5 @@
-﻿using System.Windows;
+﻿using System.Reflection;
+using System.Windows;
 using System.Windows.Controls;
 
 namespace Lepo.i18n.Demo.Views
@@ -37,7 +38,8 @@ namespace Lepo.i18n.Demo.Views
             switch (Translator.Current)
             {
                 case "pl_PL":
-                    await Translator.SetLanguageAsync("de_DE");
+                    // This language is dynamically loaded after other languages have been initialized on startup.
+                    await Translator.SetLanguageAsync(Assembly.GetExecutingAssembly(), "de_DE", "Lepo.i18n.Demo.Strings.de_DE.yml");
                     break;
 
                 case "de_DE":
