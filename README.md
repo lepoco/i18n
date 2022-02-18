@@ -39,7 +39,14 @@ Lepo.i18n.Translator.SetLanguage(
 ```xaml
 <Page xmlns:i18n="clr-namespace:Lepo.i18n;assembly=Lepo.i18n">
 
+  <!-- Via markup extension -->
   <TextBlock Text="{i18n:Translate String='Hello World'}"/>
+
+  <!-- Or converter -->
+  <wpfui:CardExpander
+    Header="{i18n:Translate String='card.networks.title'}"
+    Subtitle="{Binding NetworksCount, ConverterParameter='card.networks.detected'
+    Converter={StaticResource TranslateConverter}, Mode=OneWay}"/>
 
 </Page>
 ```
