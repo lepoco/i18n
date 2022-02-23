@@ -158,6 +158,24 @@ namespace Lepo.i18n
         }
 
         /// <summary>
+        /// Clears dictionary with languages records.
+        /// </summary>
+        public static bool Flush()
+        {
+            TranslationStorage.TranslationsDictionary = new Dictionary<string, IDictionary<uint, string>>();
+
+            return true;
+        }
+
+        /// <summary>
+        /// Asynchronously clears dictionary with languages records.
+        /// </summary>
+        public static async Task<bool> FlushAsync()
+        {
+            return await Task.Run(Flush);
+        }
+
+        /// <summary>
         /// Translates <see cref="string"/> based on given word or key.
         /// </summary>
         /// <param name="textOrKey">Text to be translated.</param>
