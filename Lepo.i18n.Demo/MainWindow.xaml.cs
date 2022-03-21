@@ -16,9 +16,9 @@ namespace Lepo.i18n.Demo
     {
         public MainWindow()
         {
-            WPFUI.Background.Manager.Apply(this);
-
             InitializeComponent();
+
+            Loaded += (sender, args) => WPFUI.Appearance.Watcher.Watch(this);
 
             LoadFrame();
         }

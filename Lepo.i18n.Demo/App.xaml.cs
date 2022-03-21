@@ -16,8 +16,6 @@ namespace Lepo.i18n.Demo
     {
         protected override void OnStartup(StartupEventArgs e)
         {
-            WPFUI.Theme.Watcher.Start(true, true);
-
             var langPath = "Lepo.i18n.Demo.Strings.";
 
             Translator.LoadLanguages(
