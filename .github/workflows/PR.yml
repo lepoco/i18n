@@ -26,7 +26,7 @@ jobs:
         run: msbuild Lepo.i18n.sln -p:Configuration=Release -m
 
       - name: Publish net60
-        uses: actions/upload-artifact@v2
+        uses: actions/upload-artifact@v3
         id: publish_net6
         with:
           name: Lepo.i18n-net6

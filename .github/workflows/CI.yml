@@ -41,7 +41,7 @@ jobs:
         run: msbuild Lepo.i18n.sln -p:Configuration=Release -m
 
       - name: Publish net60
-        uses: actions/upload-artifact@v2
+        uses: actions/upload-artifact@v3
         id: publish_net6
         with:
           name: Lepo.i18n-net6
@@ -49,7 +49,7 @@ jobs:
             Lepo.i18n/bin/Release/net6.0-windows
 
       - name: Publish net50
-        uses: actions/upload-artifact@v2
+        uses: actions/upload-artifact@v3
         id: publish_net5
         with:
           name: Lepo.i18n-net5
@@ -57,14 +57,14 @@ jobs:
             Lepo.i18n/bin/Release/net5.0-windows
 
       - name: Publish net48
-        uses: actions/upload-artifact@v2
+        uses: actions/upload-artifact@v3
         with:
           name: Lepo.i18n-net48
           path: |
             Lepo.i18n/bin/Release/net48
 
       - name: Publish nupkg
-        uses: actions/upload-artifact@v2
+        uses: actions/upload-artifact@v3
         with:
           name: lepo-nupkg
           path: |
