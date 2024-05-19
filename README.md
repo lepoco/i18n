@@ -13,9 +13,9 @@ This repository contains the source code for the Lepo.i18n NuGet packages.
 
 Lepo.i18n is available as NuGet package on NuGet.org:  
 https://www.nuget.org/packages/Lepo.i18n  
-https://www.nuget.org/packages/Lepo.i18n.Json  
+https://www.nuget.org/packages/Lepo.i18n.DependencyInjection  
 https://www.nuget.org/packages/Lepo.i18n.Wpf  
-https://www.nuget.org/packages/Lepo.i18n.Yaml
+https://www.nuget.org/packages/Lepo.i18n.Json
 
 You can add it to your project using .NET CLI:
 

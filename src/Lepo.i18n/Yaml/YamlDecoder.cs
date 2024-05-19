@@ -3,8 +3,6 @@
 // Copyright (C) Leszek Pomianowski and Lepo.i18n Contributors.
 // All Rights Reserved.
 
-using System.Security.Cryptography;
-
 namespace Lepo.i18n.Yaml;
 
 /// <summary>
