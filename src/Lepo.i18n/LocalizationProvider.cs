@@ -5,11 +5,9 @@
 
 namespace Lepo.i18n;
 
-public class LocalizationProvider(IEnumerable<LocalizationSet> sets) : ILocalizationProvider
+public class LocalizationProvider(CultureInfo culture, IEnumerable<LocalizationSet> sets) : ILocalizationProvider
 {
     private static LocalizationProvider? instance;
-
-    private static CultureInfo culture = CultureInfo.CurrentCulture;
 
     public LocalizationSet? Get(CultureInfo culture)
     {

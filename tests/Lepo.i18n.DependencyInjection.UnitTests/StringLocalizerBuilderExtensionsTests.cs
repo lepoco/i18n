@@ -43,7 +43,7 @@ public sealed class StringLocalizerBuilderExtensionsTests
 
         _ = services.AddStringLocalizer(b =>
         {
-            _ = b.FromResource(assembly, "Lepo.i18n.UnitTests.Resources.Test", new("cs-CZ"));
+            _ = b.FromResource(assembly, "Lepo.i18n.DependencyInjection.UnitTests.Resources.Test", new("cs-CZ"));
         });
 
         ServiceProvider serviceProvider = services.BuildServiceProvider();

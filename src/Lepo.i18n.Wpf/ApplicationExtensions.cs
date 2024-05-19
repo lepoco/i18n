@@ -3,13 +3,11 @@
 // Copyright (C) Leszek Pomianowski and Lepo.i18n Contributors.
 // All Rights Reserved.
 
-using System.Windows;
-
 namespace Lepo.i18n.Wpf;
 
 public static class ApplicationExtensions
 {
-    public static Application AddStringLocalizer(
+    public static Application UseStringLocalizer(
         this Application app,
         Action<LocalizationBuilder> configure
     )
@@ -18,7 +16,7 @@ public static class ApplicationExtensions
 
         configure(builder);
 
-        LocalizationProvider localizer = new(builder.GetLocalizations());
+        LocalizationProvider localizer = new(CultureInfo.CurrentUICulture, builder.GetLocalizations());
         LocalizationProvider.SetInstance(localizer);
 
         return app;

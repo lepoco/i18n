@@ -18,17 +18,15 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 		ThirdPartyNotices.txt = ThirdPartyNotices.txt
 	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Lepo.i18n.Yaml", "src\Lepo.i18n.Yaml\Lepo.i18n.Yaml.csproj", "{B935AF12-97DD-419E-99C3-8F76D9A0229D}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Lepo.i18n.Json", "src\Lepo.i18n.Json\Lepo.i18n.Json.csproj", "{83E6E4CA-DC57-4F68-8FDF-A78BE95BFEA5}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Lepo.i18n.Json", "src\Lepo.i18n.Json\Lepo.i18n.Json.csproj", "{83E6E4CA-DC57-4F68-8FDF-A78BE95BFEA5}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{AA93DD64-B88F-46ED-9981-EABA0F3C3E95}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Lepo.i18n.UnitTests", "tests\Lepo.i18n.UnitTests\Lepo.i18n.UnitTests.csproj", "{98789E33-F370-46FF-B4B6-CEAA81E9C2C3}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Lepo.i18n.UnitTests", "tests\Lepo.i18n.UnitTests\Lepo.i18n.UnitTests.csproj", "{98789E33-F370-46FF-B4B6-CEAA81E9C2C3}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Lepo.i18n.DependencyInjection", "src\Lepo.i18n.DependencyInjection\Lepo.i18n.DependencyInjection.csproj", "{6297D5AB-EE2C-4DBB-BE29-B4813BB8803F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Lepo.i18n.DependencyInjection", "src\Lepo.i18n.DependencyInjection\Lepo.i18n.DependencyInjection.csproj", "{6297D5AB-EE2C-4DBB-BE29-B4813BB8803F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Lepo.i18n.DependencyInjection.UnitTests", "tests\Lepo.i18n.DependencyInjection.UnitTests\Lepo.i18n.DependencyInjection.UnitTests.csproj", "{274021AA-F5A4-4A02-B8B7-224B254031A1}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Lepo.i18n.DependencyInjection.UnitTests", "tests\Lepo.i18n.DependencyInjection.UnitTests\Lepo.i18n.DependencyInjection.UnitTests.csproj", "{274021AA-F5A4-4A02-B8B7-224B254031A1}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -44,10 +42,6 @@ Global
 		{94DA5B37-AD49-42C0-AB0C-86055FE111B9}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{94DA5B37-AD49-42C0-AB0C-86055FE111B9}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{94DA5B37-AD49-42C0-AB0C-86055FE111B9}.Release|Any CPU.Build.0 = Release|Any CPU
-		{B935AF12-97DD-419E-99C3-8F76D9A0229D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{B935AF12-97DD-419E-99C3-8F76D9A0229D}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{B935AF12-97DD-419E-99C3-8F76D9A0229D}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{B935AF12-97DD-419E-99C3-8F76D9A0229D}.Release|Any CPU.Build.0 = Release|Any CPU
 		{83E6E4CA-DC57-4F68-8FDF-A78BE95BFEA5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{83E6E4CA-DC57-4F68-8FDF-A78BE95BFEA5}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{83E6E4CA-DC57-4F68-8FDF-A78BE95BFEA5}.Release|Any CPU.ActiveCfg = Release|Any CPU

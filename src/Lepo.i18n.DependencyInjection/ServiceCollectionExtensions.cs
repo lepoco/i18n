@@ -19,7 +19,7 @@ public static class ServiceCollectionExtensions
 
         configure(builder);
 
-        LocalizationProvider localizer = new(builder.GetLocalizations());
+        LocalizationProvider localizer = new(CultureInfo.CurrentCulture, builder.GetLocalizations());
         LocalizationProvider.SetInstance(localizer);
 
         _ = services.AddSingleton<ILocalizationProvider>(

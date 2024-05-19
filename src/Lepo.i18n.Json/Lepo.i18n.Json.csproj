@@ -32,6 +32,10 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="System.Text.Json" />
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\Lepo.i18n\Lepo.i18n.csproj" />
   </ItemGroup>
 

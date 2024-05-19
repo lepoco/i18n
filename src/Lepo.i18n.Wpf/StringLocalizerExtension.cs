@@ -3,8 +3,6 @@
 // Copyright (C) Leszek Pomianowski and Lepo.i18n Contributors.
 // All Rights Reserved.
 
-using System.Windows.Markup;
-
 namespace Lepo.i18n.Wpf;
 
 /// <summary>
