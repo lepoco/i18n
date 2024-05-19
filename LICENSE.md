@@ -1,6 +1,6 @@
 MIT License
 
-Copyright (c) 2022-2024 Leszek Pomianowski and Lepo.i18n Contributors. https://dev.lepo.co/
+Copyright (c) 2024 Leszek Pomianowski and Lepo.i18n Contributors. https://dev.lepo.co/
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal

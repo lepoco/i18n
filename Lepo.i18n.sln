@@ -3,9 +3,28 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.0.32014.148
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Lepo.i18n", "Lepo.i18n\Lepo.i18n.csproj", "{FA600754-7612-4089-B114-AB5CAFE289AB}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Lepo.i18n", "src\Lepo.i18n\Lepo.i18n.csproj", "{FA600754-7612-4089-B114-AB5CAFE289AB}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Lepo.i18n.Demo", "Lepo.i18n.Demo\Lepo.i18n.Demo.csproj", "{2CF0D6DB-53B8-411A-AFDD-73E21606B9AA}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Lepo.i18n.Wpf", "src\Lepo.i18n.Wpf\Lepo.i18n.Wpf.csproj", "{94DA5B37-AD49-42C0-AB0C-86055FE111B9}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{8770563A-FE6A-41DC-A394-67CC9FB8181D}"
+	ProjectSection(SolutionItems) = preProject
+		.editorconfig = .editorconfig
+		Directory.Build.props = Directory.Build.props
+		Directory.Build.targets = Directory.Build.targets
+		Directory.Packages.props = Directory.Packages.props
+		nuget.config = nuget.config
+		README.md = README.md
+		ThirdPartyNotices.txt = ThirdPartyNotices.txt
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Lepo.i18n.Yaml", "src\Lepo.i18n.Yaml\Lepo.i18n.Yaml.csproj", "{B935AF12-97DD-419E-99C3-8F76D9A0229D}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Lepo.i18n.Json", "src\Lepo.i18n.Json\Lepo.i18n.Json.csproj", "{83E6E4CA-DC57-4F68-8FDF-A78BE95BFEA5}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{AA93DD64-B88F-46ED-9981-EABA0F3C3E95}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Lepo.i18n.UnitTests", "tests\Lepo.i18n.UnitTests\Lepo.i18n.UnitTests.csproj", "{98789E33-F370-46FF-B4B6-CEAA81E9C2C3}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -17,13 +36,28 @@ Global
 		{FA600754-7612-4089-B114-AB5CAFE289AB}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{FA600754-7612-4089-B114-AB5CAFE289AB}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{FA600754-7612-4089-B114-AB5CAFE289AB}.Release|Any CPU.Build.0 = Release|Any CPU
-		{2CF0D6DB-53B8-411A-AFDD-73E21606B9AA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{2CF0D6DB-53B8-411A-AFDD-73E21606B9AA}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{2CF0D6DB-53B8-411A-AFDD-73E21606B9AA}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{2CF0D6DB-53B8-411A-AFDD-73E21606B9AA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{94DA5B37-AD49-42C0-AB0C-86055FE111B9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{94DA5B37-AD49-42C0-AB0C-86055FE111B9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{94DA5B37-AD49-42C0-AB0C-86055FE111B9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{94DA5B37-AD49-42C0-AB0C-86055FE111B9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B935AF12-97DD-419E-99C3-8F76D9A0229D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B935AF12-97DD-419E-99C3-8F76D9A0229D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B935AF12-97DD-419E-99C3-8F76D9A0229D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B935AF12-97DD-419E-99C3-8F76D9A0229D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{83E6E4CA-DC57-4F68-8FDF-A78BE95BFEA5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{83E6E4CA-DC57-4F68-8FDF-A78BE95BFEA5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{83E6E4CA-DC57-4F68-8FDF-A78BE95BFEA5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{83E6E4CA-DC57-4F68-8FDF-A78BE95BFEA5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{98789E33-F370-46FF-B4B6-CEAA81E9C2C3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{98789E33-F370-46FF-B4B6-CEAA81E9C2C3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{98789E33-F370-46FF-B4B6-CEAA81E9C2C3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{98789E33-F370-46FF-B4B6-CEAA81E9C2C3}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{98789E33-F370-46FF-B4B6-CEAA81E9C2C3} = {AA93DD64-B88F-46ED-9981-EABA0F3C3E95}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {BF9C3C0B-D0EC-4FA3-A0D5-A8F70572737A}

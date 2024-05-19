@@ -1,0 +1,29 @@
+release:
+  - base-branch: 'main'
+
+PR:
+  - base-branch: [ 'main', 'development' ]
+
+github_actions:
+- changed-files:
+  - any-glob-to-any-file: '.github/workflows/**'
+
+documentation:
+- changed-files:
+  - any-glob-to-any-file: [ 'docs/**', 'documentation/**' ]
+
+dotnet:
+- changed-files:
+  - any-glob-to-any-file: '**/*.cs'
+
+update:
+- changed-files:
+  - any-glob-to-any-file: 'src/Directory.Build.props'
+
+NuGet:
+- changed-files:
+  - any-glob-to-any-file: [ 'src/Lepo.i18n/**', 'src/Directory.Packages.props' ]
+
+dependencies:
+- changed-files:
+  - any-glob-to-any-file: [ 'src/Directory.Packages.props' ]

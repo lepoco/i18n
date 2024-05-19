@@ -1,0 +1,35 @@
+name: lepo-i18n-cd-nuget
+
+on:
+  push:
+    branches: [main]
+
+  workflow_dispatch:
+
+jobs:
+  deploy:
+    runs-on: windows-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: microsoft/setup-msbuild@v1.3
+        with:
+          msbuild-architecture: x64
+      - uses: nuget/setup-nuget@v2
+        with:
+          nuget-api-key: ${{ secrets.NUGET_API_KEY }}
+      - name: Setup .NET Core SDK 8.x
+        uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: 8.x
+
+      - name: Install dependencies
+        run: dotnet restore
+
+      - name: Build
+        run: dotnet build Lepo.i18n.sln --configuration Release --no-restore -p:SourceLinkEnabled=true
+
+      - name: Run tests
+        run: dotnet test Lepo.i18n.sln --configuration Release --no-restore --no-build --verbosity quiet
+
+      # - name: Publish the package to NuGet.org
+      #   run: nuget push **\*.nupkg -NonInteractive -SkipDuplicate -Source 'https://api.nuget.org/v3/index.json'
