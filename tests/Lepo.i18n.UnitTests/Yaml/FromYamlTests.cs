@@ -13,6 +13,7 @@ public sealed class FromYamlTests
     public void FromYaml_ShouldProperlyAddLocalizations()
     {
         LocalizationBuilder builder = new();
+
         _ = builder.FromYaml(
             "Lepo.i18n.UnitTests.Resources.Translations.pl_PL.yaml",
             new CultureInfo("pl-PL")
