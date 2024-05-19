@@ -2,3 +2,7 @@
 // If a copy of the MIT was not distributed with this file, You can obtain one at https://opensource.org/licenses/MIT.
 // Copyright (C) Leszek Pomianowski and Lepo.i18n Contributors.
 // All Rights Reserved.
+
+namespace Lepo.i18n.DependencyInjection.UnitTests.Resources;
+
+public class Test;

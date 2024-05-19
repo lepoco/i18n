@@ -3,8 +3,6 @@
 // Copyright (C) Leszek Pomianowski and Lepo.i18n Contributors.
 // All Rights Reserved.
 
-global using Microsoft.Extensions.DependencyInjection;
-global using Microsoft.Extensions.Localization;
 global using System;
 global using System.Collections;
 global using System.Collections.Generic;
@@ -12,4 +10,3 @@ global using System.Globalization;
 global using System.Linq;
 global using System.Reflection;
 global using System.Resources;
-global using System.Text;

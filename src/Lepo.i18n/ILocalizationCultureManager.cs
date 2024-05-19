@@ -5,5 +5,12 @@
 
 namespace Lepo.i18n;
 
-public class StringLocalizerBuilderException(string message, Exception innerException)
-    : Exception(message, innerException);
+/// <summary>
+/// Manages localization settings.
+/// </summary>
+public interface ILocalizationCultureManager
+{
+    void SetCulture(CultureInfo culture);
+
+    CultureInfo GetCulture();
+}

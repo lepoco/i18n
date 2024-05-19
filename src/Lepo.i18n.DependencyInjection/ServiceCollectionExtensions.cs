@@ -14,28 +14,30 @@ public static class ServiceCollectionExtensions
     /// Adds a string localizer to the specified services collection.
     /// </summary>
     /// <param name="services">The <see cref="IServiceCollection"/> to add the string localizer to.</param>
-    /// <param name="configure">An action to configure the <see cref="StringLocalizerBuilder"/>.</param>
+    /// <param name="configure">An action to configure the <see cref="LocalizationBuilder"/>.</param>
     /// <returns>The same service collection so that multiple calls can be chained.</returns>
     /// <remarks>
-    /// This method configures a <see cref="StringLocalizerBuilder"/>, creates a <see cref="StringLocalizer"/> from it,
+    /// This method configures a <see cref="LocalizationBuilder"/>, creates a <see cref="StringLocalizer"/> from it,
     /// sets the <see cref="StringLocalizer"/> as the instance in the <see cref="StringLocalizerFactory"/>,
-    /// and then adds the <see cref="ILocalizationManager"/> and <see cref="IStringLocalizer"/> services to the services collection.
+    /// and then adds the <see cref="ILocalizationCultureManager"/> and <see cref="IStringLocalizer"/> services to the services collection.
     /// </remarks>
     public static IServiceCollection AddStringLocalizer(
         this IServiceCollection services,
-        Action<StringLocalizerBuilder> configure
+        Action<LocalizationBuilder> configure
     )
     {
-        StringLocalizerBuilder builder = new();
+        LocalizationBuilder builder = new();
 
         configure(builder);
 
-        StringLocalizer localizer = new(builder.GetLocalizations());
+        LocalizationProvider localizer = new(builder.GetLocalizations());
+        LocalizationProvider.SetInstance(localizer);
 
-        StringLocalizerFactory.SetInstance(localizer);
-
-        _ = services.AddSingleton<ILocalizationManager, LocalizationManager>();
-        _ = services.AddSingleton<IStringLocalizer>((_) => StringLocalizerFactory.GetInstance()!);
+        _ = services.AddSingleton<ILocalizationProvider>(
+            (_) => LocalizationProvider.GetInstance()!
+        );
+        _ = services.AddTransient<ILocalizationCultureManager, LocalizationCultureManager>();
+        _ = services.AddTransient<IStringLocalizer, StringLocalizer>();
 
         return services;
     }

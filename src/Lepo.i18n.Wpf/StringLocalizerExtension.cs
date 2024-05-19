@@ -48,7 +48,8 @@ public class StringLocalizerExtension : MarkupExtension
             return string.Empty;
         }
 
-        return StringLocalizerFactory.GetInstance()?[EscapeText(Text)] ?? EscapeText(Text);
+        //return LocalizationProvider.GetInstance()?[EscapeText(Text)] ?? EscapeText(Text);
+        return string.Empty;
     }
 
     /// <summary>

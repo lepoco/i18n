@@ -5,18 +5,11 @@
 
 namespace Lepo.i18n;
 
-/// <summary>
-/// Provides localized strings for a specific culture.
-/// </summary>
-/// <remarks>
-/// This class implements the <see cref="IStringLocalizer"/> interface and provides localized strings
-/// based on the provided dictionary of localized strings and the current culture.
-/// </remarks>
-public class StringLocalizer(IDictionary<CultureInfo, IEnumerable<LocalizedString>> localizations)
-    : IStringLocalizer
+public class StringLocalizer(
+    ILocalizationProvider localizations,
+    ILocalizationCultureManager cultureManager
+) : IStringLocalizer
 {
-    private CultureInfo culture = CultureInfo.CurrentCulture;
-
     /// <summary>
     /// Gets the localized string for the specified name.
     /// </summary>
@@ -34,30 +27,16 @@ public class StringLocalizer(IDictionary<CultureInfo, IEnumerable<LocalizedStrin
         LocalizeString(name, arguments);
 
     /// <summary>
-    /// Updates the culture used for localization.
-    /// </summary>
-    /// <param name="culture">The new culture to use for localization.</param>
-    /// <remarks>
-    /// This method updates the culture used for localization. It does not validate whether the culture is supported.
-    /// </remarks>
-    public void SetCulture(CultureInfo culture)
-    {
-        this.culture = culture;
-    }
-
-    /// <summary>
     /// Gets all the localized strings for the current culture.
     /// </summary>
     /// <param name="_">A boolean parameter (not used).</param>
     /// <returns>The localized strings.</returns>
     public IEnumerable<LocalizedString> GetAllStrings(bool _)
     {
-        if (localizations.TryGetValue(culture, out IEnumerable<LocalizedString>? translations))
-        {
-            return translations;
-        }
-
-        return [];
+        return localizations
+                .Get(cultureManager.GetCulture())
+                ?.Strings.Select(x => new LocalizedString(x.Key, x.Value ?? x.Key))
+            ?? Enumerable.Empty<LocalizedString>();
     }
 
     private LocalizedString LocalizeString(string name, object[] placeholders)

@@ -3,17 +3,15 @@
 // Copyright (C) Leszek Pomianowski and Lepo.i18n Contributors.
 // All Rights Reserved.
 
-using System.Globalization;
-
 namespace Lepo.i18n.Yaml;
 
 /// <summary>
-/// Provides extension methods for the <see cref="StringLocalizerBuilder"/> class.
+/// Provides extension methods for the <see cref="LocalizationBuilder"/> class.
 /// </summary>
 public static class StringLocalizerBuilderExtensions
 {
-    public static StringLocalizerBuilder FromYaml(
-        this StringLocalizerBuilder builder,
+    public static LocalizationBuilder FromYaml(
+        this LocalizationBuilder builder,
         string path,
         CultureInfo culture
     )

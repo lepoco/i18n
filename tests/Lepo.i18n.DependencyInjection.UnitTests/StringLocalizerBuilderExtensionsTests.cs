@@ -4,6 +4,7 @@
 // All Rights Reserved.
 
 using System.Collections.Generic;
+using Lepo.i18n.DependencyInjection.UnitTests.Resources;
 
 namespace Lepo.i18n.UnitTests;
 
@@ -18,13 +19,14 @@ public sealed class StringLocalizerBuilderExtensionsTests
 
         _ = services.AddStringLocalizer(b =>
         {
-            _ = b.FromResource(assembly, "Lepo.i18n.UnitTests.Resources.Test", new("pl-PL"));
-            _ = b.FromResource(assembly, "Lepo.i18n.UnitTests.Resources.Test", new("en-US"));
+            _ = b.FromResource<Test>(new("pl-PL"));
+            _ = b.FromResource<Test>(new("en-US"));
         });
 
         ServiceProvider serviceProvider = services.BuildServiceProvider();
         IStringLocalizer localizer = serviceProvider.GetRequiredService<IStringLocalizer>();
-        ILocalizationManager manager = serviceProvider.GetRequiredService<ILocalizationManager>();
+        ILocalizationCultureManager manager =
+            serviceProvider.GetRequiredService<ILocalizationCultureManager>();
 
         manager.SetCulture(new("pl-PL"));
 
@@ -47,7 +49,8 @@ public sealed class StringLocalizerBuilderExtensionsTests
 
         ServiceProvider serviceProvider = services.BuildServiceProvider();
         IStringLocalizer localizer = serviceProvider.GetRequiredService<IStringLocalizer>();
-        ILocalizationManager manager = serviceProvider.GetRequiredService<ILocalizationManager>();
+        ILocalizationCultureManager manager =
+            serviceProvider.GetRequiredService<ILocalizationCultureManager>();
 
         manager.SetCulture(new("cz-CZ"));
 
@@ -67,7 +70,7 @@ public sealed class StringLocalizerBuilderExtensionsTests
 
         _ = action
             .Should()
-            .Throw<StringLocalizerBuilderException>()
+            .Throw<LocalizationBuilderException>()
             .WithMessage("Failed to register translation resources.");
     }
 
@@ -86,7 +89,8 @@ public sealed class StringLocalizerBuilderExtensionsTests
 
         ServiceProvider serviceProvider = services.BuildServiceProvider();
         IStringLocalizer localizer = serviceProvider.GetRequiredService<IStringLocalizer>();
-        ILocalizationManager manager = serviceProvider.GetRequiredService<ILocalizationManager>();
+        ILocalizationCultureManager manager =
+            serviceProvider.GetRequiredService<ILocalizationCultureManager>();
 
         manager.SetCulture(new("en-US"));
 
