@@ -6,21 +6,26 @@
 namespace Lepo.i18n;
 
 /// <summary>
-/// Builds a dictionary of localized strings for different cultures.
+/// Provides functionality to build a collection of localized strings for different cultures.
 /// </summary>
 public class LocalizationBuilder
 {
     private readonly HashSet<LocalizationSet> localizations = new HashSet<LocalizationSet>();
 
     /// <summary>
-    /// Gets the dictionary of localized strings for different cultures.
+    /// Gets the collection of localized strings for different cultures.
     /// </summary>
-    /// <returns>The dictionary of localized strings.</returns>
+    /// <returns>The collection of localized strings.</returns>
     public IEnumerable<LocalizationSet> GetLocalizations()
     {
         return localizations;
     }
 
+    /// <summary>
+    /// Adds a localization set to the collection.
+    /// </summary>
+    /// <param name="localization">The localization set to add.</param>
+    /// <exception cref="InvalidOperationException">Thrown when a localization set for the same culture already exists in the collection.</exception>
     public void AddLocalization(LocalizationSet localization)
     {
         if (localizations.Any(x => x.Culture == localization.Culture))

@@ -3,6 +3,8 @@
 // Copyright (C) Leszek Pomianowski and Lepo.i18n Contributors.
 // All Rights Reserved.
 
+using System.IO;
+
 namespace Lepo.i18n.Yaml;
 
 /// <summary>
@@ -10,25 +12,63 @@ namespace Lepo.i18n.Yaml;
 /// </summary>
 public static class StringLocalizerBuilderExtensions
 {
+    /// <summary>
+    /// Adds localized strings from a YAML file in the calling assembly to the <see cref="LocalizationBuilder"/>.
+    /// </summary>
+    /// <param name="builder">The <see cref="LocalizationBuilder"/> to add the localized strings to.</param>
+    /// <param name="path">The path to the YAML file in the assembly.</param>
+    /// <param name="culture">The culture for which the localized strings are provided.</param>
+    /// <returns>The <see cref="LocalizationBuilder"/> with the added localized strings.</returns>
     public static LocalizationBuilder FromYaml(
         this LocalizationBuilder builder,
         string path,
         CultureInfo culture
     )
     {
-        //var yaml = new YamlStream();
-        //using (var reader = new StreamReader(path))
-        //{
-        //    yaml.Load(reader);
-        //}
+        return builder.FromYaml(Assembly.GetCallingAssembly(), path, culture);
+    }
 
-        //var root = (YamlMappingNode)yaml.Documents[0].RootNode;
-        //var localizations = root.Children.ToDictionary(
-        //    x => x.Key.ToString(),
-        //    x => x.Value.ToString()
-        //);
+    /// <summary>
+    /// Adds localized strings from a YAML file in the specified assembly to the <see cref="LocalizationBuilder"/>.
+    /// </summary>
+    /// <param name="builder">The <see cref="LocalizationBuilder"/> to add the localized strings to.</param>
+    /// <param name="assembly">The assembly that contains the YAML file.</param>
+    /// <param name="path">The path to the YAML file in the assembly.</param>
+    /// <param name="culture">The culture for which the localized strings are provided.</param>
+    /// <returns>The <see cref="LocalizationBuilder"/> with the added localized strings.</returns>
+    /// <exception cref="ArgumentException">Thrown when the path does not point to a YAML file.</exception>
+    /// <exception cref="Exception">Thrown when the YAML file cannot be found in the assembly.</exception>
+    public static LocalizationBuilder FromYaml(
+        this LocalizationBuilder builder,
+        Assembly assembly,
+        string path,
+        CultureInfo culture
+    )
+    {
+        string lowerResourcePath = path.ToLower().Trim();
 
-        //return builder.AddLocalization(culture, localizations);
+        if (!(lowerResourcePath.EndsWith(".yml") || lowerResourcePath.EndsWith(".yaml")))
+        {
+            throw new ArgumentException(
+                $"Parameter {nameof(path)} in {nameof(FromYaml)} must be path to the YAML file."
+            );
+        }
+
+        using Stream? stream = assembly.GetManifestResourceStream(path);
+
+        if (stream is null)
+        {
+            throw new Exception($"Resource {path} not found in assembly {assembly.FullName}.");
+        }
+
+        using StreamReader reader = new StreamReader(stream);
+
+        IDictionary<string, string> deserializedYaml = YamlDecoder.FromString(reader.ReadToEnd());
+
+        builder.AddLocalization(
+            new LocalizationSet(Path.GetFileNameWithoutExtension(path), culture, deserializedYaml!)
+        );
+
         return builder;
     }
 }

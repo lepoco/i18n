@@ -3,6 +3,8 @@
 // Copyright (C) Leszek Pomianowski and Lepo.i18n Contributors.
 // All Rights Reserved.
 
+using System.Linq;
+
 namespace Lepo.i18n.Wpf;
 
 /// <summary>
@@ -21,6 +23,11 @@ public class StringLocalizerExtension : MarkupExtension
     public string? Text { get; set; }
 
     /// <summary>
+    /// Gets or sets the namespace of the text to be localized.
+    /// </summary>
+    public string? Namespace { get; set; }
+
+    /// <summary>
     /// Initializes a new instance of the <see cref="StringLocalizerExtension"/> class.
     /// </summary>
     public StringLocalizerExtension() { }
@@ -31,7 +38,18 @@ public class StringLocalizerExtension : MarkupExtension
     /// <param name="text">The text to be localized.</param>
     public StringLocalizerExtension(string text)
     {
-        Text = text;
+        Text = EscapeText(text);
+    }
+
+    /// <summary>
+    /// Initializes a new instance of the <see cref="StringLocalizerExtension"/> class with the specified text and namespace.
+    /// </summary>
+    /// <param name="text">The text to be localized.</param>
+    /// <param name="textNamespace">The namespace of the text to be localized.</param>
+    public StringLocalizerExtension(string text, string textNamespace)
+    {
+        Text = EscapeText(text);
+        Namespace = textNamespace;
     }
 
     /// <summary>
@@ -46,8 +64,32 @@ public class StringLocalizerExtension : MarkupExtension
             return string.Empty;
         }
 
-        //return LocalizationProvider.GetInstance()?[EscapeText(Text)] ?? EscapeText(Text);
-        return string.Empty;
+        LocalizationSet? localizationSet;
+
+        if (Namespace is null)
+        {
+            localizationSet = LocalizationProvider
+                .GetInstance()
+                ?.Get(
+                    LocalizationProvider.GetInstance()?.GetCulture() ?? CultureInfo.CurrentUICulture
+                );
+        }
+        else
+        {
+            localizationSet = LocalizationProvider
+                .GetInstance()
+                ?.Get(
+                    Namespace,
+                    LocalizationProvider.GetInstance()?.GetCulture() ?? CultureInfo.CurrentUICulture
+                );
+        }
+
+        if (localizationSet is null)
+        {
+            return Text;
+        }
+
+        return localizationSet.Strings.FirstOrDefault(s => s.Key == Text).Value ?? Text;
     }
 
     /// <summary>

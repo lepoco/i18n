@@ -5,6 +5,9 @@
 
 namespace Lepo.i18n;
 
+/// <summary>
+/// Provides functionality to localize strings.
+/// </summary>
 public class StringLocalizer(
     ILocalizationProvider localizations,
     ILocalizationCultureManager cultureManager

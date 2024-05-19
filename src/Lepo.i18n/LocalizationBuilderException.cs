@@ -5,5 +5,8 @@
 
 namespace Lepo.i18n;
 
+/// <summary>
+/// Represents errors that occur during the execution of the localization builder.
+/// </summary>
 public class LocalizationBuilderException(string message, Exception innerException)
     : Exception(message, innerException);

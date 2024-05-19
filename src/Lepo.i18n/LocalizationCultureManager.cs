@@ -5,8 +5,12 @@
 
 namespace Lepo.i18n;
 
+/// <summary>
+/// Provides functionality to manage the current culture for localization.
+/// </summary>
 public class LocalizationCultureManager : ILocalizationCultureManager
 {
+    /// <inheritdoc />
     public CultureInfo GetCulture()
     {
         return LocalizationProvider.GetInstance()?.GetCulture() ?? CultureInfo.CurrentCulture;
