@@ -10,17 +10,6 @@ namespace Lepo.i18n;
 /// </summary>
 public static class ServiceCollectionExtensions
 {
-    /// <summary>
-    /// Adds a string localizer to the specified services collection.
-    /// </summary>
-    /// <param name="services">The <see cref="IServiceCollection"/> to add the string localizer to.</param>
-    /// <param name="configure">An action to configure the <see cref="LocalizationBuilder"/>.</param>
-    /// <returns>The same service collection so that multiple calls can be chained.</returns>
-    /// <remarks>
-    /// This method configures a <see cref="LocalizationBuilder"/>, creates a <see cref="StringLocalizer"/> from it,
-    /// sets the <see cref="StringLocalizer"/> as the instance in the <see cref="StringLocalizerFactory"/>,
-    /// and then adds the <see cref="ILocalizationCultureManager"/> and <see cref="IStringLocalizer"/> services to the services collection.
-    /// </remarks>
     public static IServiceCollection AddStringLocalizer(
         this IServiceCollection services,
         Action<LocalizationBuilder> configure

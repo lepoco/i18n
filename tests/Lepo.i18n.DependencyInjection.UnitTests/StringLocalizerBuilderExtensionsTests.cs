@@ -3,10 +3,9 @@
 // Copyright (C) Leszek Pomianowski and Lepo.i18n Contributors.
 // All Rights Reserved.
 
-using System.Collections.Generic;
 using Lepo.i18n.DependencyInjection.UnitTests.Resources;
 
-namespace Lepo.i18n.UnitTests;
+namespace Lepo.i18n.DependencyInjection.UnitTests;
 
 public sealed class StringLocalizerBuilderExtensionsTests
 {
