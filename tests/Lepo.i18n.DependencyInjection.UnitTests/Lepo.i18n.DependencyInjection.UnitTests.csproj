@@ -1,12 +1,23 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFramework>net8.0</TargetFramework>
+    <TargetFrameworks>net472;net8.0</TargetFrameworks>
     <IsPackable>false</IsPackable>
     <IsTestProject>true</IsTestProject>
     <IsTrimmable>false</IsTrimmable>
   </PropertyGroup>
 
+  
+  <ItemGroup>
+    <None Remove="Resources\Translations-pl-PL.yaml" />
+    <None Remove="Resources\Translations-en-US.yaml" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Include="Resources\Translations-pl-PL.yaml" />
+    <EmbeddedResource Include="Resources\Translations-en-US.yaml" />
+  </ItemGroup>
+ 
   <ItemGroup>
     <PackageReference Include="FluentAssertions" />
     <PackageReference Include="Microsoft.Extensions.DependencyInjection" />

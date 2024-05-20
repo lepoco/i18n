@@ -5,4 +5,4 @@
 
 namespace Lepo.i18n.DependencyInjection.UnitTests.Resources;
 
-public class Test;
+public partial class Test;

@@ -156,11 +156,16 @@ public static class LocalizationBuilderExtensions
         CultureInfo culture
     )
     {
+        CultureInfo cultureToRestore = Thread.CurrentThread.CurrentCulture;
+
+        // NOTE: Fix net framework satellite assembly loading
         try
         {
-            // NOTE: Fix net framework satellite assembly loading
+            Thread.CurrentThread.CurrentCulture = culture;
+            Thread.CurrentThread.CurrentUICulture = culture;
 
             ResourceManager resourceManager = new(baseName, assembly);
+
             ResourceSet? resourceSet = resourceManager.GetResourceSet(culture, true, true);
 
             if (resourceSet is null)
@@ -175,11 +180,17 @@ public static class LocalizationBuilderExtensions
 
             builder.AddLocalization(new LocalizationSet(baseName, culture, localizations));
 
+            Thread.CurrentThread.CurrentCulture = cultureToRestore;
+            Thread.CurrentThread.CurrentUICulture = cultureToRestore;
+
             return builder;
         }
         catch (MissingManifestResourceException ex)
         {
-            throw new LocalizationBuilderException("Failed to register translation resources.", ex);
+            throw new LocalizationBuilderException(
+                $"Failed to register translation resources for \"{culture}\".",
+                ex
+            );
         }
     }
 }
