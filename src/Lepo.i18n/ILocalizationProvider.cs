@@ -11,19 +11,22 @@ namespace Lepo.i18n;
 public interface ILocalizationProvider
 {
     /// <summary>
-    /// Retrieves the localization set for the specified culture.
-    /// </summary>
-    /// <param name="culture">The culture to get the localization set for.</param>
-    /// <returns>The localization set for the specified culture, or null if no localization set is found.</returns>
-
-    LocalizationSet? Get(CultureInfo culture);
-
-    /// <summary>
     /// Retrieves the localization set with the specified name for the specified culture.
     /// </summary>
-    /// <param name="name">The name of the localization set to get.</param>
     /// <param name="culture">The culture to get the localization set for.</param>
+    /// <param name="name">The name of the localization set to get.</param>
     /// <returns>The localization set with the specified name for the specified culture, or null if no localization set is found.</returns>
+    LocalizationSet? GetLocalizationSet(CultureInfo culture, string? name);
 
-    LocalizationSet? Get(string name, CultureInfo culture);
+    /// <summary>
+    /// Gets the current culture.
+    /// </summary>
+    /// <returns>The current culture.</returns>
+    CultureInfo GetCulture();
+
+    /// <summary>
+    /// Sets the current culture.
+    /// </summary>
+    /// <param name="cultureInfo">The culture to set.</param>
+    void SetCulture(CultureInfo cultureInfo);
 }

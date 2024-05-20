@@ -1,0 +1,12 @@
+# Comment
+main.languages: Languages
+main.hello: "Hello world"
+
+namespace.test:
+    main.languages: Languages in namespace.test #yet another comment 
+    main.hello: 'Hello world in namespace.test'
+
+# Some comment
+other.namespace:
+    main.languages: Languages in other.namespace #yet another comment 
+    main.hello: 'Hello world in other.namespace'

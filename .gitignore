@@ -16,6 +16,9 @@
 # Mono auto generated files
 mono_crash.*
 
+# Coverage
+coverage/
+
 # Build results
 [Dd]ebug/
 [Dd]ebugPublic/

@@ -3,7 +3,7 @@
 // Copyright (C) Leszek Pomianowski and Lepo.i18n Contributors.
 // All Rights Reserved.
 
-namespace Lepo.i18n;
+namespace Lepo.i18n.DependencyInjection;
 
 /// <summary>
 /// Provides extension methods for the <see cref="IServiceCollection"/> interface.
@@ -25,15 +25,11 @@ public static class ServiceCollectionExtensions
 
         configure(builder);
 
-        LocalizationProvider localizer =
-            new(CultureInfo.CurrentCulture, builder.GetLocalizations());
-        LocalizationProvider.SetInstance(localizer);
+        LocalizationProviderFactory.SetInstance(builder.Build());
 
-        _ = services.AddSingleton<ILocalizationProvider>(
-            (_) => LocalizationProvider.GetInstance()!
-        );
+        _ = services.AddSingleton(_ => LocalizationProviderFactory.GetInstance()!);
         _ = services.AddTransient<ILocalizationCultureManager, LocalizationCultureManager>();
-        _ = services.AddTransient<IStringLocalizer, StringLocalizer>();
+        _ = services.AddTransient<IStringLocalizer, StaticStringLocalizer>();
 
         return services;
     }

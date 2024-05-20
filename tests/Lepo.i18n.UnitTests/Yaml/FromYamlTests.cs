@@ -13,16 +13,19 @@ public sealed class FromYamlTests
     public void FromYaml_ShouldProperlyAddLocalizations()
     {
         LocalizationBuilder builder = new();
+        builder.SetCulture(new CultureInfo("pl-PL"));
 
         _ = builder.FromYaml(
-            "Lepo.i18n.UnitTests.Resources.Translations.pl_PL.yaml",
+            "Lepo.i18n.UnitTests.Resources.Translations-pl-PL.yaml",
             new CultureInfo("pl-PL")
         );
 
-        LocalizationProvider localizationProvider =
-            new(new CultureInfo("pl-PL"), builder.GetLocalizations());
+        ILocalizationProvider localizationProvider = builder.Build();
 
-        LocalizationSet? localizationSet = localizationProvider.Get(new CultureInfo("pl-PL"));
+        LocalizationSet? localizationSet = localizationProvider.GetLocalizationSet(
+            new CultureInfo("pl-PL"),
+            default
+        );
 
         _ = localizationSet!
             .Strings.First(x => x.Key == "main.hello")

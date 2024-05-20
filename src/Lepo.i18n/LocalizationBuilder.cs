@@ -10,15 +10,29 @@ namespace Lepo.i18n;
 /// </summary>
 public class LocalizationBuilder
 {
-    private readonly HashSet<LocalizationSet> localizations = new HashSet<LocalizationSet>();
+    private readonly HashSet<LocalizationSet> localizations = [];
+
+    private CultureInfo? selectedCulture;
 
     /// <summary>
-    /// Gets the collection of localized strings for different cultures.
+    /// Builds an <see cref="ILocalizationProvider"/> using the current culture and localizations.
     /// </summary>
-    /// <returns>The collection of localized strings.</returns>
-    public IEnumerable<LocalizationSet> GetLocalizations()
+    /// <returns>An <see cref="ILocalizationProvider"/> with the current culture and localizations.</returns>
+    public ILocalizationProvider Build()
     {
-        return localizations;
+        return new LocalizationProvider(
+            selectedCulture ?? CultureInfo.CurrentCulture,
+            localizations
+        );
+    }
+
+    /// <summary>
+    /// Sets the culture for the <see cref="LocalizationBuilder"/>.
+    /// </summary>
+    /// <param name="culture">The culture to set.</param>
+    public void SetCulture(CultureInfo culture)
+    {
+        selectedCulture = culture;
     }
 
     /// <summary>
@@ -28,11 +42,15 @@ public class LocalizationBuilder
     /// <exception cref="InvalidOperationException">Thrown when a localization set for the same culture already exists in the collection.</exception>
     public void AddLocalization(LocalizationSet localization)
     {
-        if (localizations.Any(x => x.Culture == localization.Culture))
+        if (
+            localizations.Any(x =>
+                x.Name == localization.Name && x.Culture.Equals(localization.Culture)
+            )
+        )
         {
             // NOTE: Consider adding merging of multiple collections for one culture
             throw new InvalidOperationException(
-                $"Localization for culture {localization.Culture} already exists."
+                $"Localization \"{localization.Name}\" for culture {localization.Culture} already exists."
             );
         }
 

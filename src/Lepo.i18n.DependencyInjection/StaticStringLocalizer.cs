@@ -3,12 +3,12 @@
 // Copyright (C) Leszek Pomianowski and Lepo.i18n Contributors.
 // All Rights Reserved.
 
-namespace Lepo.i18n;
+namespace Lepo.i18n.DependencyInjection;
 
 /// <summary>
 /// Provides functionality to localize strings.
 /// </summary>
-public class StringLocalizer(
+public class StaticStringLocalizer(
     ILocalizationProvider localizations,
     ILocalizationCultureManager cultureManager
 ) : IStringLocalizer
@@ -37,9 +37,8 @@ public class StringLocalizer(
     public IEnumerable<LocalizedString> GetAllStrings(bool _)
     {
         return localizations
-                .Get(cultureManager.GetCulture())
-                ?.Strings.Select(x => new LocalizedString(x.Key, x.Value ?? x.Key))
-            ?? Enumerable.Empty<LocalizedString>();
+                .GetLocalizationSet(cultureManager.GetCulture(), default)
+                ?.Strings.Select(x => new LocalizedString(x.Key, x.Value ?? x.Key)) ?? [];
     }
 
     private LocalizedString LocalizeString(string name, object[] placeholders)

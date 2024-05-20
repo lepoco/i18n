@@ -36,7 +36,7 @@ public class StringLocalizerExtension : MarkupExtension
     /// Initializes a new instance of the <see cref="StringLocalizerExtension"/> class with the specified text.
     /// </summary>
     /// <param name="text">The text to be localized.</param>
-    public StringLocalizerExtension(string text)
+    public StringLocalizerExtension(string? text)
     {
         Text = EscapeText(text);
     }
@@ -46,7 +46,7 @@ public class StringLocalizerExtension : MarkupExtension
     /// </summary>
     /// <param name="text">The text to be localized.</param>
     /// <param name="textNamespace">The namespace of the text to be localized.</param>
-    public StringLocalizerExtension(string text, string textNamespace)
+    public StringLocalizerExtension(string? text, string? textNamespace)
     {
         Text = EscapeText(text);
         Namespace = textNamespace;
@@ -64,25 +64,13 @@ public class StringLocalizerExtension : MarkupExtension
             return string.Empty;
         }
 
-        LocalizationSet? localizationSet;
-
-        if (Namespace is null)
-        {
-            localizationSet = LocalizationProvider
-                .GetInstance()
-                ?.Get(
-                    LocalizationProvider.GetInstance()?.GetCulture() ?? CultureInfo.CurrentUICulture
-                );
-        }
-        else
-        {
-            localizationSet = LocalizationProvider
-                .GetInstance()
-                ?.Get(
-                    Namespace,
-                    LocalizationProvider.GetInstance()?.GetCulture() ?? CultureInfo.CurrentUICulture
-                );
-        }
+        LocalizationSet? localizationSet = LocalizationProviderFactory
+            .GetInstance()
+            ?.GetLocalizationSet(
+                LocalizationProviderFactory.GetInstance()?.GetCulture()
+                    ?? CultureInfo.CurrentUICulture,
+                Namespace ?? default
+            );
 
         if (localizationSet is null)
         {
@@ -97,8 +85,13 @@ public class StringLocalizerExtension : MarkupExtension
     /// </summary>
     /// <param name="text">The text to escape.</param>
     /// <returns>The escaped text.</returns>
-    private static string EscapeText(string text)
+    private static string EscapeText(string? text)
     {
+        if (text is null)
+        {
+            return string.Empty;
+        }
+
         return text.Replace("&amp;", "&")
             .Replace("&lt;", "<")
             .Replace("&gt;", ">")

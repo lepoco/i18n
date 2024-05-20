@@ -8,5 +8,11 @@ namespace Lepo.i18n;
 /// <summary>
 /// Represents errors that occur during the execution of the localization builder.
 /// </summary>
-public class LocalizationBuilderException(string message, Exception innerException)
-    : Exception(message, innerException);
+public class LocalizationBuilderException : Exception
+{
+    public LocalizationBuilderException(string message, Exception innerException)
+        : base(message, innerException) { }
+
+    public LocalizationBuilderException(string message)
+        : base(message) { }
+};

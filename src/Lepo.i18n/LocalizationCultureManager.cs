@@ -13,12 +13,13 @@ public class LocalizationCultureManager : ILocalizationCultureManager
     /// <inheritdoc />
     public CultureInfo GetCulture()
     {
-        return LocalizationProvider.GetInstance()?.GetCulture() ?? CultureInfo.CurrentCulture;
+        return LocalizationProviderFactory.GetInstance()?.GetCulture()
+            ?? CultureInfo.CurrentCulture;
     }
 
     /// <inheritdoc />
     public void SetCulture(CultureInfo culture)
     {
-        LocalizationProvider.GetInstance()?.SetCulture(culture);
+        LocalizationProviderFactory.GetInstance()?.SetCulture(culture);
     }
 }

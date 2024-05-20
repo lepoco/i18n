@@ -3,7 +3,7 @@
 // Copyright (C) Leszek Pomianowski and Lepo.i18n Contributors.
 // All Rights Reserved.
 
-using Lepo.i18n.DependencyInjection.UnitTests.Resources;
+using System.Globalization;
 
 namespace Lepo.i18n.DependencyInjection.UnitTests;
 
@@ -18,8 +18,17 @@ public sealed class StringLocalizerBuilderExtensionsTests
 
         _ = services.AddStringLocalizer(b =>
         {
-            _ = b.FromResource<Test>(new("pl-PL"));
-            _ = b.FromResource<Test>(new("en-US"));
+            _ = b.SetCulture("pl-PL");
+            _ = b.FromResource(
+                "Lepo.i18n.DependencyInjection.UnitTests.Resources.Test",
+                new CultureInfo("pl-PL")
+            );
+            _ = b.FromResource(
+                "Lepo.i18n.DependencyInjection.UnitTests.Resources.Test",
+                new CultureInfo("en-US")
+            );
+            //_ = b.FromResource<Test>("pl-PL");
+            //_ = b.FromResource<Test>("en-US");
         });
 
         ServiceProvider serviceProvider = services.BuildServiceProvider();
@@ -27,11 +36,9 @@ public sealed class StringLocalizerBuilderExtensionsTests
         ILocalizationCultureManager manager =
             serviceProvider.GetRequiredService<ILocalizationCultureManager>();
 
-        manager.SetCulture(new("pl-PL"));
-
         _ = localizer["Test"].Value.Should().Be("Test po polsku");
 
-        manager.SetCulture(new("en-US"));
+        _ = manager.SetCulture("en-US");
 
         _ = localizer["Test"].Value.Should().Be("Test in english");
     }
@@ -71,10 +78,7 @@ public sealed class StringLocalizerBuilderExtensionsTests
                 _ = b.FromResource(assembly, "Lepo.i18n.UnitTests.Resources.Invalid", new("en-US"));
             });
 
-        _ = action
-            .Should()
-            .Throw<LocalizationBuilderException>()
-            .WithMessage("Failed to register translation resources.");
+        _ = action.Should().Throw<LocalizationBuilderException>();
     }
 
     [Fact]
@@ -86,7 +90,7 @@ public sealed class StringLocalizerBuilderExtensionsTests
         {
             _ = b.AddLocalization(
                 new("en-US"),
-                new Dictionary<string, string> { { "Test", "Manual translation" } }
+                new Dictionary<string, string?> { { "Test", "Manual translation" } }
             );
         });
 

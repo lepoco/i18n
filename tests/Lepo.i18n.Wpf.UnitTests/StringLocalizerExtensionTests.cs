@@ -10,19 +10,21 @@ public sealed class StringLocalizerExtensionTests
     [Fact]
     public void ProvideValue_ShouldReturnLocalizedText()
     {
-        LocalizationProvider localizationProvider = new LocalizationProvider(
-            new CultureInfo("en-US"),
-            [
-                new LocalizationSet(
-                    "Test",
-                    new CultureInfo("en-US"),
-                    new Dictionary<string, string> { { "Test", "Test value" } }!
-                )
-            ]
-        );
-        LocalizationProvider.SetInstance(localizationProvider);
+        LocalizationProvider localizationProvider =
+            new(
+                new CultureInfo("en-US"),
+                [
+                    new LocalizationSet(
+                        "Test",
+                        new CultureInfo("en-US"),
+                        new Dictionary<string, string> { { "Test", "Test value" } }!
+                    )
+                ]
+            );
 
-        StringLocalizerExtension extension = new StringLocalizerExtension("Test");
+        LocalizationProviderFactory.SetInstance(localizationProvider);
+
+        StringLocalizerExtension extension = new("Test");
 
         object? result = extension.ProvideValue(null!);
 

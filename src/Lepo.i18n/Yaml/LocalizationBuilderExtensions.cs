@@ -3,14 +3,14 @@
 // Copyright (C) Leszek Pomianowski and Lepo.i18n Contributors.
 // All Rights Reserved.
 
-using System.IO;
+using Lepo.i18n.IO;
 
 namespace Lepo.i18n.Yaml;
 
 /// <summary>
 /// Provides extension methods for the <see cref="LocalizationBuilder"/> class.
 /// </summary>
-public static class StringLocalizerBuilderExtensions
+public static class LocalizationBuilderExtensions
 {
     /// <summary>
     /// Adds localized strings from a YAML file in the calling assembly to the <see cref="LocalizationBuilder"/>.
@@ -45,29 +45,37 @@ public static class StringLocalizerBuilderExtensions
         CultureInfo culture
     )
     {
-        string lowerResourcePath = path.ToLower().Trim();
-
-        if (!(lowerResourcePath.EndsWith(".yml") || lowerResourcePath.EndsWith(".yaml")))
+        if (!(path.EndsWith(".yml") || path.EndsWith(".yaml")))
         {
             throw new ArgumentException(
                 $"Parameter {nameof(path)} in {nameof(FromYaml)} must be path to the YAML file."
             );
         }
 
-        using Stream? stream = assembly.GetManifestResourceStream(path);
+        string? contents = EmbeddedResourceReader.ReadToEnd(path, assembly);
 
-        if (stream is null)
+        if (contents is null)
         {
-            throw new Exception($"Resource {path} not found in assembly {assembly.FullName}.");
+            throw new LocalizationBuilderException(
+                $"Resource {path} not found in assembly {assembly.FullName}."
+            );
         }
 
-        using StreamReader reader = new StreamReader(stream);
+        string baseNamespace = Path.GetFileNameWithoutExtension(path).Trim().ToLowerInvariant();
+        IDictionary<string, IDictionary<string, string>> deserializedYaml =
+            YamlDictionariesDeserializer.FromString(contents);
 
-        IDictionary<string, string> deserializedYaml = YamlDecoder.FromString(reader.ReadToEnd());
+        foreach (
+            KeyValuePair<string, IDictionary<string, string>> localizedStrings in deserializedYaml
+        )
+        {
+            string? name =
+                (localizedStrings.Key is null || localizedStrings.Key == "default")
+                    ? baseNamespace
+                    : localizedStrings.Key;
 
-        builder.AddLocalization(
-            new LocalizationSet(Path.GetFileNameWithoutExtension(path), culture, deserializedYaml!)
-        );
+            builder.AddLocalization(new LocalizationSet(name, culture, localizedStrings.Value!));
+        }
 
         return builder;
     }

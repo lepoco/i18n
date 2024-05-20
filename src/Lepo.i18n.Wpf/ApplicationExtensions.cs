@@ -25,10 +25,7 @@ public static class ApplicationExtensions
 
         configure(builder);
 
-        LocalizationProvider localizer =
-            new(CultureInfo.CurrentUICulture, builder.GetLocalizations());
-
-        LocalizationProvider.SetInstance(localizer);
+        LocalizationProviderFactory.SetInstance(builder.Build());
 
         return app;
     }
@@ -41,7 +38,10 @@ public static class ApplicationExtensions
     /// <returns>The application with the set culture.</returns>
     public static Application SetLocalizationCulture(this Application app, CultureInfo culture)
     {
-        LocalizationProvider.GetInstance()?.SetCulture(culture);
+        CultureInfo.CurrentUICulture = culture;
+        CultureInfo.DefaultThreadCurrentUICulture = culture;
+
+        LocalizationProviderFactory.GetInstance()?.SetCulture(culture);
 
         return app;
     }

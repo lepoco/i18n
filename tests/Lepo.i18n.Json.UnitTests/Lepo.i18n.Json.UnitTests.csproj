@@ -1,12 +1,21 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFrameworks>net472;net8.0-windows</TargetFrameworks>
+    <TargetFrameworks>net472;net8.0</TargetFrameworks>
     <IsPackable>false</IsPackable>
     <IsTestProject>true</IsTestProject>
     <IsTrimmable>false</IsTrimmable>
-    <UseWPF>true</UseWPF>
   </PropertyGroup>
+
+  <ItemGroup>
+    <None Remove="Resources\Translations-en-US.json" />
+    <None Remove="Resources\Translations-pl-PL.json" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Include="Resources\Translations-en-US.json" />
+    <EmbeddedResource Include="Resources\Translations-pl-PL.json" />
+  </ItemGroup>
 
   <ItemGroup>
     <PackageReference Include="FluentAssertions" />
@@ -24,7 +33,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\src\Lepo.i18n.Wpf\Lepo.i18n.Wpf.csproj" />
+    <ProjectReference Include="..\..\src\Lepo.i18n.Json\Lepo.i18n.Json.csproj" />
   </ItemGroup>
 
 </Project>

@@ -3,6 +3,6 @@
 // Copyright (C) Leszek Pomianowski and Lepo.i18n Contributors.
 // All Rights Reserved.
 
-namespace Lepo.i18n.Wpf.UnitTests.Resources;
+namespace Lepo.i18n.DependencyInjection.UnitTests.Resources;
 
 public class Test;

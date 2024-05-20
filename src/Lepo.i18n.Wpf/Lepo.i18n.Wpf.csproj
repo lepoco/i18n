@@ -4,15 +4,7 @@
     <PackageId>Lepo.i18n.Wpf</PackageId>
     <TargetFrameworks>net462;net6.0-windows;net8.0-windows</TargetFrameworks>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
-    <IsTrimmable>true</IsTrimmable>
-    <EnableTrimAnalyzer>true</EnableTrimAnalyzer>
     <UseWPF>true</UseWPF>
-  </PropertyGroup>
-
-  <PropertyGroup Condition="'$(TargetFramework)' == 'net8.0'">
-    <PublishAot>true</PublishAot>
-    <StripSymbols>true</StripSymbols>
-    <OptimizationPreference>Speed</OptimizationPreference>
   </PropertyGroup>
 
   <!-- Necessary polyfills -->

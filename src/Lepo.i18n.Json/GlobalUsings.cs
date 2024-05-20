@@ -3,6 +3,10 @@
 // Copyright (C) Leszek Pomianowski and Lepo.i18n Contributors.
 // All Rights Reserved.
 
-namespace Lepo.i18n.DependencyInjection.UnitTests.Resources;
-
-public class Test;
+global using System;
+global using System.Collections.Generic;
+global using System.Globalization;
+global using System.IO;
+global using System.Reflection;
+global using System.Text.Json;
+global using System.Text.Json.Serialization;

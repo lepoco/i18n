@@ -3,11 +3,16 @@
 // Copyright (C) Leszek Pomianowski and Lepo.i18n Contributors.
 // All Rights Reserved.
 
+using System.Diagnostics.CodeAnalysis;
+
 namespace Lepo.i18n;
 
 /// <summary>
 /// Provides functionality to translate strings. This class is obsolete and <see cref="LocalizationProvider"/> should be used instead.
 /// </summary>
+#if NET5_0_OR_GREATER
+[ExcludeFromCodeCoverage(Justification = "This class is obsolete and should not be used.")]
+#endif
 [Obsolete($"{nameof(Translator)} is obsolete, use {nameof(LocalizationProvider)} instead.")]
 public static class Translator
 {
@@ -24,9 +29,13 @@ public static class Translator
             return string.Empty;
         }
 
-        LocalizationSet? localizationSet = LocalizationProvider
+        LocalizationSet? localizationSet = LocalizationProviderFactory
             .GetInstance()
-            ?.Get(LocalizationProvider.GetInstance()?.GetCulture() ?? CultureInfo.CurrentUICulture);
+            ?.GetLocalizationSet(
+                LocalizationProviderFactory.GetInstance()?.GetCulture()
+                    ?? CultureInfo.CurrentUICulture,
+                default
+            );
         ;
 
         if (localizationSet is null)
@@ -61,4 +70,10 @@ public static class Translator
     {
         throw new Exception("This method is obsolete and should not be used.");
     }
+
+    [Obsolete("This method is obsolete and should not be used.")]
+    public static void LoadLanguages() { }
+
+    [Obsolete("This method is obsolete and should not be used.")]
+    public static void SetLanguage(string culture) { }
 }
