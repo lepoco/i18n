@@ -3,7 +3,7 @@
 // Copyright (C) Leszek Pomianowski and Lepo.i18n Contributors.
 // All Rights Reserved.
 
-using System.Globalization;
+using Lepo.i18n.DependencyInjection.UnitTests.Resources;
 
 namespace Lepo.i18n.DependencyInjection.UnitTests;
 
@@ -18,17 +18,8 @@ public sealed class StringLocalizerBuilderExtensionsTests
 
         _ = services.AddStringLocalizer(b =>
         {
-            _ = b.SetCulture("pl-PL");
-            _ = b.FromResource(
-                "Lepo.i18n.DependencyInjection.UnitTests.Resources.Test",
-                new CultureInfo("pl-PL")
-            );
-            _ = b.FromResource(
-                "Lepo.i18n.DependencyInjection.UnitTests.Resources.Test",
-                new CultureInfo("en-US")
-            );
-            //_ = b.FromResource<Test>("pl-PL");
-            //_ = b.FromResource<Test>("en-US");
+            _ = b.FromResource<Test>("pl-PL");
+            _ = b.FromResource<Test>("en-US");
         });
 
         ServiceProvider serviceProvider = services.BuildServiceProvider();

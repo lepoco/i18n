@@ -158,6 +158,8 @@ public static class LocalizationBuilderExtensions
     {
         try
         {
+            // NOTE: Fix net framework satellite assembly loading
+
             ResourceManager resourceManager = new(baseName, assembly);
             ResourceSet? resourceSet = resourceManager.GetResourceSet(culture, true, true);
 
