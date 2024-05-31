@@ -5,4 +5,5 @@
 
 namespace Lepo.i18n.UnitTests.Resources;
 
+// ReSharper disable once ClassNeverInstantiated.Global
 public partial class Test;

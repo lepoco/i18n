@@ -37,6 +37,8 @@ public sealed class StringLocalizerBuilderExtensionsTests
         ILocalizationCultureManager manager =
             serviceProvider.GetRequiredService<ILocalizationCultureManager>();
 
+        _ = manager.SetCulture("pl-PL");
+        
         _ = localizer["Test"].Value.Should().Be("Test po polsku");
 
         _ = manager.SetCulture("en-US");
