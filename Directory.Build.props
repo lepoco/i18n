@@ -14,7 +14,7 @@
     <Company>lepo.co</Company>
     <Authors>lepo.co</Authors>
     <Product>Lepo.i18n</Product>
-    <CommonTags>lepoco;toolkit;translation;wpf;winforms;i18n</CommonTags>
+    <CommonTags>lepoco;toolkit;translation;wpf;winforms;i18n;localization;cli</CommonTags>
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
     <PackageRequireLicenseAcceptance>true</PackageRequireLicenseAcceptance>
     <Copyright>(c) lepo.co | Leszek Pomianowski and Contributors. All rights reserved.</Copyright>

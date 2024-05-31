@@ -5,6 +5,8 @@
     <TargetFrameworks>net462;net6.0-windows;net8.0-windows</TargetFrameworks>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
     <UseWPF>true</UseWPF>
+    <CommonTags>$(CommonTags);wpf;windows;presentation;foundation</CommonTags>
+    <Description>Lepo.i18n is an essential tool for developers aiming to create multilingual applications in WPF, WinForms, or CLI environments.</Description>
   </PropertyGroup>
 
   <!-- Necessary polyfills -->
