@@ -52,7 +52,6 @@ public sealed class LocalizationBuilderTests
 
         ILocalizationProvider provider = builder.Build();
 
-        provider.SetCulture(new CultureInfo("en-US"));
         LocalizationSet? localizationSet = provider.GetLocalizationSet("en-US");
 
         _ = localizationSet!["Test"].Should().Be("Test in english");

@@ -31,5 +31,5 @@ jobs:
       - name: Run tests
         run: dotnet test Lepo.i18n.sln --configuration Release --no-restore --no-build --verbosity quiet
 
-      # - name: Publish the package to NuGet.org
-      #   run: nuget push **\*.nupkg -NonInteractive -SkipDuplicate -Source 'https://api.nuget.org/v3/index.json'
+      - name: Publish the package to NuGet.org
+        run: nuget push **\*.nupkg -NonInteractive -SkipDuplicate -Source 'https://api.nuget.org/v3/index.json'
