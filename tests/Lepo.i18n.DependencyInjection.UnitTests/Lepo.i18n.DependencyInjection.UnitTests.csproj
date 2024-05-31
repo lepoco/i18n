@@ -12,11 +12,6 @@
     <None Remove="Resources\Translations-pl-PL.yaml" />
     <None Remove="Resources\Translations-en-US.yaml" />
   </ItemGroup>
-
-  <ItemGroup>
-    <EmbeddedResource Include="Resources\Translations-pl-PL.yaml" />
-    <EmbeddedResource Include="Resources\Translations-en-US.yaml" />
-  </ItemGroup>
  
   <ItemGroup>
     <PackageReference Include="FluentAssertions" />

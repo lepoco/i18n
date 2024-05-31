@@ -180,10 +180,9 @@ public static class LocalizationBuilderExtensions
                 .Where(x => x.Key is string)
                 .ToDictionary(x => (string)x.Key!, x => (string?)x.Value);
 
-            builder.AddLocalization(new LocalizationSet(baseName, culture, localizations));
-
-            Thread.CurrentThread.CurrentCulture = cultureToRestore;
-            Thread.CurrentThread.CurrentUICulture = cultureToRestore;
+            builder.AddLocalization(
+                new LocalizationSet(baseName.ToLowerInvariant(), culture, localizations)
+            );
 
             return builder;
         }
@@ -193,6 +192,11 @@ public static class LocalizationBuilderExtensions
                 $"Failed to register translation resources for \"{culture}\".",
                 ex
             );
+        }
+        finally
+        {
+            Thread.CurrentThread.CurrentCulture = cultureToRestore;
+            Thread.CurrentThread.CurrentUICulture = cultureToRestore;
         }
     }
 }

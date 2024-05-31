@@ -23,6 +23,29 @@ public static class LocalizationBuilderExtensions
             Converters = { new TranslationsContainerConverter() }
         };
 
+    public static LocalizationBuilder FromJsonString(
+        this LocalizationBuilder builder,
+        string jsonString,
+        CultureInfo culture
+    )
+    {
+        return builder.FromJsonString(jsonString, default, culture);
+    }
+
+    public static LocalizationBuilder FromJsonString(
+        this LocalizationBuilder builder,
+        string jsonString,
+        string? baseName,
+        CultureInfo culture
+    )
+    {
+        builder.AddLocalization(
+            new LocalizationSet(baseName, culture, ComputeLocalizationPairs(jsonString))
+        );
+
+        return builder;
+    }
+
     /// <summary>
     /// Loads localization data from a JSON file in the calling assembly.
     /// </summary>
@@ -63,11 +86,24 @@ public static class LocalizationBuilderExtensions
 
         string? contents = EmbeddedResourceReader.ReadToEnd(path, assembly);
 
+        builder.AddLocalization(
+            new LocalizationSet(
+                Path.GetFileNameWithoutExtension(path).Trim().ToLowerInvariant(),
+                culture,
+                ComputeLocalizationPairs(contents)
+            )
+        );
+
+        return builder;
+    }
+
+    private static IEnumerable<KeyValuePair<string, string?>> ComputeLocalizationPairs(
+        string? contents
+    )
+    {
         if (contents is null)
         {
-            throw new LocalizationBuilderException(
-                $"Resource {path} not found in assembly {assembly.FullName}."
-            );
+            throw new ArgumentNullException(nameof(contents));
         }
 
         Version schemaVersion =
@@ -101,21 +137,13 @@ public static class LocalizationBuilderExtensions
             if (localizedStrings.ContainsKey(localizedString.Name))
             {
                 throw new LocalizationBuilderException(
-                    $"The {path} file contains duplicate \"{localizedString.Name}\" keys."
+                    $"The contents of the JSON file contains duplicate \"{localizedString.Name}\" keys."
                 );
             }
 
             localizedStrings.Add(localizedString.Name, localizedString.Value);
         }
 
-        builder.AddLocalization(
-            new LocalizationSet(
-                Path.GetFileNameWithoutExtension(path).Trim().ToLowerInvariant(),
-                culture,
-                localizedStrings!
-            )
-        );
-
-        return builder;
+        return localizedStrings!;
     }
 }

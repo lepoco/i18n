@@ -3,7 +3,9 @@
 // Copyright (C) Leszek Pomianowski and Lepo.i18n Contributors.
 // All Rights Reserved.
 
+global using System;
 global using System.Globalization;
 global using System.Linq;
+global using System.Reflection;
 global using FluentAssertions;
 global using Xunit;

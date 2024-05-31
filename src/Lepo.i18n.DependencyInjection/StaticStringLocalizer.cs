@@ -18,7 +18,7 @@ public class StaticStringLocalizer(
     /// </summary>
     /// <param name="name">The name of the localized string.</param>
     /// <returns>The localized string.</returns>
-    public LocalizedString this[string name] => this[name, Array.Empty<object>()];
+    public LocalizedString this[string name] => this[name, []];
 
     /// <summary>
     /// Gets the localized string for the specified name and format arguments.

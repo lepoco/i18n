@@ -74,7 +74,9 @@ public static class LocalizationBuilderExtensions
                     ? baseNamespace
                     : localizedStrings.Key;
 
-            builder.AddLocalization(new LocalizationSet(name, culture, localizedStrings.Value!));
+            builder.AddLocalization(
+                new LocalizationSet(name.ToLowerInvariant(), culture, localizedStrings.Value!)
+            );
         }
 
         return builder;

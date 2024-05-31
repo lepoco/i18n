@@ -69,7 +69,7 @@ public class StringLocalizerExtension : MarkupExtension
             ?.GetLocalizationSet(
                 LocalizationProviderFactory.GetInstance()?.GetCulture()
                     ?? CultureInfo.CurrentUICulture,
-                Namespace ?? default
+                Namespace?.ToLowerInvariant() ?? default
             );
 
         if (localizationSet is null)

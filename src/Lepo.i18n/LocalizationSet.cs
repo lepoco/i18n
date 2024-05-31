@@ -15,4 +15,21 @@ public record LocalizationSet(
     string? Name,
     CultureInfo Culture,
     IEnumerable<KeyValuePair<string, string?>> Strings
-);
+)
+{
+    public string? this[string key]
+    {
+        get
+        {
+            foreach (KeyValuePair<string, string?> localizationString in Strings)
+            {
+                if (localizationString.Key == key)
+                {
+                    return localizationString.Value;
+                }
+            }
+
+            return key;
+        }
+    }
+}

@@ -24,6 +24,7 @@ public static class Translator
     [Obsolete("This method is obsolete and should not be used.")]
     public static string String(string value)
     {
+        // ReSharper disable once ConditionIsAlwaysTrueOrFalseAccordingToNullableAPIContract
         if (value is null)
         {
             return string.Empty;
