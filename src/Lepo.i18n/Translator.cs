@@ -138,7 +138,7 @@ public static class Translator
             }
             else
             {
-                _ = builder.FromResource(
+                builder.FromResource(
                     applicationAssembly,
                     languageResource.Value,
                     new CultureInfo(languageResource.Key.Replace("_", "-"))

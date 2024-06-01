@@ -43,8 +43,8 @@ IHost host = Host.CreateDefaultBuilder()
     {
       services.AddStringLocalizer(b =>
       {
-        b.FromResource(assembly, "Lepo.i18n.Resources.Test", new("pl-PL"));
-        b.FromResource(assembly, "Lepo.i18n.Resources.Test", new("en-US"));
+        b.FromResource<Translations>(new("pl-PL"));
+        b.FromYaml(assembly, "Lepo.i18n.Resources.Translations-en.yaml", new("en-US"));
       });
     }
   )

@@ -14,7 +14,7 @@ public sealed class LocalizationBuilderTests
     {
         LocalizationBuilder builder = new();
 
-        Func<LocalizationBuilder> action = () =>
+        Action action = () =>
             builder.FromResource(
                 Assembly.GetExecutingAssembly(),
                 "Lepo.i18n.UnitTests.Resources.Invalid",
@@ -29,7 +29,7 @@ public sealed class LocalizationBuilderTests
     {
         LocalizationBuilder builder = new();
 
-        _ = builder.FromResource<Test>(new CultureInfo("en-US"));
+        builder.FromResource<Test>(new CultureInfo("en-US"));
 
         ILocalizationProvider provider = builder.Build();
 
@@ -44,7 +44,7 @@ public sealed class LocalizationBuilderTests
     {
         LocalizationBuilder builder = new();
 
-        _ = builder.FromResource(
+        builder.FromResource(
             Assembly.GetExecutingAssembly(),
             "Lepo.i18n.UnitTests.Resources.Test",
             new CultureInfo("en-US")

@@ -21,7 +21,7 @@ public static class ServiceCollectionExtensions
         Action<LocalizationBuilder> configure
     )
     {
-        LocalizationBuilder builder = new();
+        DependencyInjectionLocalizationBuilder builder = new(services);
 
         configure(builder);
 

@@ -3,8 +3,6 @@
 // Copyright (C) Leszek Pomianowski and Lepo.i18n Contributors.
 // All Rights Reserved.
 
-using Lepo.i18n.IO;
-
 namespace Lepo.i18n;
 
 /// <summary>
@@ -80,30 +78,9 @@ public static class LocalizationBuilderExtensions
         string culture
     )
     {
-        return builder.FromResource<TResource>(new CultureInfo(culture));
-    }
+        builder.FromResource<TResource>(new CultureInfo(culture));
 
-    /// <summary>
-    /// Adds localized strings from a resource in the calling assembly to the <see cref="LocalizationBuilder"/>.
-    /// </summary>
-    /// <typeparam name="TResource">The type of the resource.</typeparam>
-    /// <param name="builder">The <see cref="LocalizationBuilder"/> to add the localized strings to.</param>
-    /// <param name="culture">The culture for which the localized strings are provided.</param>
-    /// <returns>The <see cref="LocalizationBuilder"/> with the added localized strings.</returns>
-    public static LocalizationBuilder FromResource<TResource>(
-        this LocalizationBuilder builder,
-        CultureInfo culture
-    )
-    {
-        Type resourceType = typeof(TResource);
-        string? resourceName = resourceType.FullName;
-
-        if (resourceName is null)
-        {
-            return builder;
-        }
-
-        return builder.FromResource(resourceType.Assembly, resourceName, culture);
+        return builder;
     }
 
     /// <summary>
@@ -120,35 +97,7 @@ public static class LocalizationBuilderExtensions
         CultureInfo culture
     )
     {
-        return builder.FromResource(Assembly.GetCallingAssembly(), baseName, culture);
-    }
-
-    /// <summary>
-    /// Adds localized strings from a resource with the specified base name in the specified assembly to the <see cref="LocalizationBuilder"/>.
-    /// </summary>
-    /// <param name="builder">The <see cref="LocalizationBuilder"/> to add the localized strings to.</param>
-    /// <param name="assembly">The assembly that contains the resource.</param>
-    /// <param name="baseName">The base name of the resource.</param>
-    /// <param name="culture">The culture for which the localized strings are provided.</param>
-    /// <returns>The <see cref="LocalizationBuilder"/> with the added localized strings.</returns>
-    /// <exception cref="LocalizationBuilderException">Thrown when the resource cannot be found.</exception>
-    public static LocalizationBuilder FromResource(
-        this LocalizationBuilder builder,
-        Assembly assembly,
-        string baseName,
-        CultureInfo culture
-    )
-    {
-        LocalizationSet? localizationSet = LocalizationSetResourceParser.Parse(
-            assembly,
-            baseName,
-            culture
-        );
-
-        if (localizationSet is not null)
-        {
-            builder.AddLocalization(localizationSet);
-        }
+        builder.FromResource(Assembly.GetCallingAssembly(), baseName, culture);
 
         return builder;
     }
