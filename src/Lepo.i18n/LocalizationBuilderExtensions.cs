@@ -3,7 +3,7 @@
 // Copyright (C) Leszek Pomianowski and Lepo.i18n Contributors.
 // All Rights Reserved.
 
-using System.Threading;
+using Lepo.i18n.IO;
 
 namespace Lepo.i18n;
 
@@ -80,10 +80,7 @@ public static class LocalizationBuilderExtensions
         string culture
     )
     {
-        return builder.FromResource<TResource>(
-            Assembly.GetCallingAssembly(),
-            new CultureInfo(culture)
-        );
+        return builder.FromResource<TResource>(new CultureInfo(culture));
     }
 
     /// <summary>
@@ -98,31 +95,15 @@ public static class LocalizationBuilderExtensions
         CultureInfo culture
     )
     {
-        return builder.FromResource<TResource>(Assembly.GetCallingAssembly(), culture);
-    }
-
-    /// <summary>
-    /// Adds localized strings from a resource in the specified assembly to the <see cref="LocalizationBuilder"/>.
-    /// </summary>
-    /// <typeparam name="TResource">The type of the resource.</typeparam>
-    /// <param name="builder">The <see cref="LocalizationBuilder"/> to add the localized strings to.</param>
-    /// <param name="assembly">The assembly that contains the resource.</param>
-    /// <param name="culture">The culture for which the localized strings are provided.</param>
-    /// <returns>The <see cref="LocalizationBuilder"/> with the added localized strings.</returns>
-    public static LocalizationBuilder FromResource<TResource>(
-        this LocalizationBuilder builder,
-        Assembly assembly,
-        CultureInfo culture
-    )
-    {
-        string? resourceName = typeof(TResource).FullName;
+        Type resourceType = typeof(TResource);
+        string? resourceName = resourceType.FullName;
 
         if (resourceName is null)
         {
             return builder;
         }
 
-        return builder.FromResource(assembly, resourceName, culture);
+        return builder.FromResource(resourceType.Assembly, resourceName, culture);
     }
 
     /// <summary>
@@ -158,45 +139,17 @@ public static class LocalizationBuilderExtensions
         CultureInfo culture
     )
     {
-        CultureInfo cultureToRestore = Thread.CurrentThread.CurrentCulture;
+        LocalizationSet? localizationSet = LocalizationSetResourceParser.Parse(
+            assembly,
+            baseName,
+            culture
+        );
 
-        // NOTE: Fix net framework satellite assembly loading
-        try
+        if (localizationSet is not null)
         {
-            Thread.CurrentThread.CurrentCulture = culture;
-            Thread.CurrentThread.CurrentUICulture = culture;
-
-            ResourceManager resourceManager = new(baseName, assembly);
-
-            ResourceSet? resourceSet = resourceManager.GetResourceSet(culture, true, true);
-
-            if (resourceSet is null)
-            {
-                return builder;
-            }
-
-            Dictionary<string, string?> localizations = resourceSet
-                .Cast<DictionaryEntry>()
-                .Where(x => x.Key is string)
-                .ToDictionary(x => (string)x.Key!, x => (string?)x.Value);
-
-            builder.AddLocalization(
-                new LocalizationSet(baseName.ToLowerInvariant(), culture, localizations)
-            );
-
-            return builder;
+            builder.AddLocalization(localizationSet);
         }
-        catch (MissingManifestResourceException ex)
-        {
-            throw new LocalizationBuilderException(
-                $"Failed to register translation resources for \"{culture}\".",
-                ex
-            );
-        }
-        finally
-        {
-            Thread.CurrentThread.CurrentCulture = cultureToRestore;
-            Thread.CurrentThread.CurrentUICulture = cultureToRestore;
-        }
+
+        return builder;
     }
 }

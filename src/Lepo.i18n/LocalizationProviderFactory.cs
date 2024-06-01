@@ -3,6 +3,8 @@
 // Copyright (C) Leszek Pomianowski and Lepo.i18n Contributors.
 // All Rights Reserved.
 
+using System.Collections.Concurrent;
+
 namespace Lepo.i18n;
 
 /// <summary>
@@ -10,7 +12,7 @@ namespace Lepo.i18n;
 /// </summary>
 public static class LocalizationProviderFactory
 {
-    private static ILocalizationProvider? instance;
+    private static readonly ConcurrentDictionary<string, ILocalizationProvider> instances = new();
 
     /// <summary>
     /// Gets the current instance of the <see cref="ILocalizationProvider"/>.
@@ -18,6 +20,17 @@ public static class LocalizationProviderFactory
     /// <returns>The current instance of the <see cref="ILocalizationProvider"/>, or null if no instance has been set.</returns>
     public static ILocalizationProvider? GetInstance()
     {
+        return GetInstance(string.Empty);
+    }
+
+    /// <summary>
+    /// Gets the current instance of the <see cref="ILocalizationProvider"/>.
+    /// </summary>
+    /// <returns>The current instance of the <see cref="ILocalizationProvider"/>, or null if no instance has been set.</returns>
+    public static ILocalizationProvider? GetInstance(string key)
+    {
+        _ = instances.TryGetValue(key, out ILocalizationProvider instance);
+
         return instance;
     }
 
@@ -27,6 +40,15 @@ public static class LocalizationProviderFactory
     /// <param name="provider">The <see cref="ILocalizationProvider"/> to set as the current instance.</param>
     public static void SetInstance(ILocalizationProvider provider)
     {
-        instance = provider;
+        SetInstance(provider, string.Empty);
+    }
+
+    /// <summary>
+    /// Sets the current instance of the <see cref="ILocalizationProvider"/>.
+    /// </summary>
+    /// <param name="provider">The <see cref="ILocalizationProvider"/> to set as the current instance.</param>
+    public static void SetInstance(ILocalizationProvider provider, string key)
+    {
+        _ = instances.AddOrUpdate(key, provider, (_, _) => provider);
     }
 }

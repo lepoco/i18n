@@ -20,13 +20,15 @@ https://www.nuget.org/packages/Lepo.i18n.Json
 You can add it to your project using .NET CLI:
 
 ```powershell
-dotnet add package Lepo.i18n
+dotnet add package Lepo.i18n.Wpf
+dotnet add package Lepo.i18n.DependencyInjection
 ```
 
 , or package manager console:
 
 ```powershell
-NuGet\Install-Package Lepo.i18n
+NuGet\Install-Package Lepo.i18n.Wpf
+NuGet\Install-Package Lepo.i18n.DependencyInjection
 ```
 
 ### 🛠️ How to Use Lepo i18n

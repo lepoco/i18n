@@ -5,10 +5,10 @@
 
 namespace Lepo.i18n.DependencyInjection.UnitTests;
 
-public sealed class StringLocalizerBuilderExtensionsTests
+public sealed class ProviderBasedStringLocalizerFactoryTests
 {
     [Fact]
-    public void AddStringLocalizer_ShouldAddLocalizations_ToServiceCollection()
+    public void Create_ShouldReturnCorrectIStringLocalizer()
     {
         ServiceCollection services = [];
 
@@ -31,42 +31,16 @@ public sealed class StringLocalizerBuilderExtensionsTests
         });
 
         ServiceProvider serviceProvider = services.BuildServiceProvider();
-        IStringLocalizer localizer = serviceProvider.GetRequiredService<IStringLocalizer>();
         ILocalizationCultureManager manager =
             serviceProvider.GetRequiredService<ILocalizationCultureManager>();
 
         _ = manager.SetCulture("pl-PL");
 
+        IStringLocalizerFactory factory =
+            serviceProvider.GetRequiredService<IStringLocalizerFactory>();
+        IStringLocalizer localizer = factory.Create("Test", default!);
+
+        _ = localizer.Should().NotBeNull();
         _ = localizer["Test"].Value.Should().Be("Test po polsku");
-
-        _ = manager.SetCulture("en-US");
-
-        _ = localizer["Test"].Value.Should().Be("Test in english");
-    }
-
-    [Fact]
-    public void AddStringLocalizer_ShouldRegisterEmptySet()
-    {
-        ServiceCollection services = [];
-
-        _ = services.AddStringLocalizer(b =>
-        {
-            b.AddLocalization(
-                new LocalizationSet(
-                    "Test",
-                    new CultureInfo("cz-CZ"),
-                    new Dictionary<string, string?>()
-                )
-            );
-        });
-
-        ServiceProvider serviceProvider = services.BuildServiceProvider();
-        IStringLocalizer localizer = serviceProvider.GetRequiredService<IStringLocalizer>();
-        ILocalizationCultureManager manager =
-            serviceProvider.GetRequiredService<ILocalizationCultureManager>();
-
-        manager.SetCulture(new("cz-CZ"));
-
-        _ = localizer["Test"].Value.Should().Be("Test");
     }
 }

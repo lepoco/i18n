@@ -6,34 +6,25 @@
 namespace Lepo.i18n.DependencyInjection;
 
 /// <summary>
-/// Provides functionality to localize strings.
+/// Provides a provider-based implementation of the <see cref="IStringLocalizer"/> interface.
 /// </summary>
-public class StaticStringLocalizer(
+/// <remarks>
+/// This class uses an <see cref="ILocalizationProvider"/> to retrieve localization sets,
+/// and an <see cref="ILocalizationCultureManager"/> to manage the current culture.
+/// </remarks>
+public class ProviderBasedStringLocalizer(
     ILocalizationProvider localizations,
     ILocalizationCultureManager cultureManager
 ) : IStringLocalizer
 {
-    /// <summary>
-    /// Gets the localized string for the specified name.
-    /// </summary>
-    /// <param name="name">The name of the localized string.</param>
-    /// <returns>The localized string.</returns>
+    /// <inheritdoc />
     public LocalizedString this[string name] => this[name, []];
 
-    /// <summary>
-    /// Gets the localized string for the specified name and format arguments.
-    /// </summary>
-    /// <param name="name">The name of the localized string.</param>
-    /// <param name="arguments">The format arguments.</param>
-    /// <returns>The localized string.</returns>
+    /// <inheritdoc />
     public LocalizedString this[string name, params object[] arguments] =>
         LocalizeString(name, arguments);
 
-    /// <summary>
-    /// Gets all the localized strings for the current culture.
-    /// </summary>
-    /// <param name="_">A boolean parameter (not used).</param>
-    /// <returns>The localized strings.</returns>
+    /// <inheritdoc />
     public IEnumerable<LocalizedString> GetAllStrings(bool _)
     {
         return localizations
@@ -41,6 +32,12 @@ public class StaticStringLocalizer(
                 ?.Strings.Select(x => new LocalizedString(x.Key, x.Value ?? x.Key)) ?? [];
     }
 
+    /// <summary>
+    /// Fills placeholders in a string with the provided values.
+    /// </summary>
+    /// <param name="name">The string with placeholders.</param>
+    /// <param name="placeholders">The values to fill the placeholders with.</param>
+    /// <returns>The string with filled placeholders.</returns>
     private LocalizedString LocalizeString(string name, object[] placeholders)
     {
         return new LocalizedString(
@@ -52,6 +49,12 @@ public class StaticStringLocalizer(
         );
     }
 
+    /// <summary>
+    /// Fills placeholders in a string with the provided values.
+    /// </summary>
+    /// <param name="value">The string with placeholders.</param>
+    /// <param name="placeholders">The values to fill the placeholders with.</param>
+    /// <returns>The string with filled placeholders.</returns>
     private static string FillPlaceholders(string value, object[] placeholders)
     {
         for (int i = 0; i < placeholders.Length; i++)

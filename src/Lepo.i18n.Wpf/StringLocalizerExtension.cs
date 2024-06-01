@@ -3,8 +3,6 @@
 // Copyright (C) Leszek Pomianowski and Lepo.i18n Contributors.
 // All Rights Reserved.
 
-using System.Linq;
-
 namespace Lepo.i18n.Wpf;
 
 /// <summary>
@@ -17,16 +15,6 @@ namespace Lepo.i18n.Wpf;
 [MarkupExtensionReturnType(typeof(string))]
 public class StringLocalizerExtension : MarkupExtension
 {
-    /// <summary>
-    /// Gets or sets the text to be localized.
-    /// </summary>
-    public string? Text { get; set; }
-
-    /// <summary>
-    /// Gets or sets the namespace of the text to be localized.
-    /// </summary>
-    public string? Namespace { get; set; }
-
     /// <summary>
     /// Initializes a new instance of the <see cref="StringLocalizerExtension"/> class.
     /// </summary>
@@ -53,6 +41,21 @@ public class StringLocalizerExtension : MarkupExtension
     }
 
     /// <summary>
+    /// Gets or sets the text to be localized.
+    /// </summary>
+    public string? Text { get; set; }
+
+    /// <summary>
+    /// Gets or sets the namespace of the text to be localized.
+    /// </summary>
+    public string? Namespace { get; set; }
+
+    /// <summary>
+    /// Provider key.
+    /// </summary>
+    public string ProviderKey { get; set; } = string.Empty;
+
+    /// <summary>
     /// Returns a localized string for the <see cref="Text"/> property.
     /// </summary>
     /// <param name="serviceProvider">An object that provides services for the markup extension.</param>
@@ -64,13 +67,15 @@ public class StringLocalizerExtension : MarkupExtension
             return string.Empty;
         }
 
+        CultureInfo currentCulture =
+            LocalizationProviderFactory.GetInstance(ProviderKey)?.GetCulture()
+            ?? CultureInfo.CurrentUICulture;
+
+        string? selectedNamespace = Namespace?.ToLowerInvariant() ?? default;
+
         LocalizationSet? localizationSet = LocalizationProviderFactory
-            .GetInstance()
-            ?.GetLocalizationSet(
-                LocalizationProviderFactory.GetInstance()?.GetCulture()
-                    ?? CultureInfo.CurrentUICulture,
-                Namespace?.ToLowerInvariant() ?? default
-            );
+            .GetInstance(ProviderKey)
+            ?.GetLocalizationSet(currentCulture, selectedNamespace);
 
         if (localizationSet is null)
         {
@@ -96,6 +101,7 @@ public class StringLocalizerExtension : MarkupExtension
             .Replace("&lt;", "<")
             .Replace("&gt;", ">")
             .Replace("&quot;", "\"")
-            .Replace("&apos;", "'");
+            .Replace("&apos;", "'")
+            .Trim();
     }
 }

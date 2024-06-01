@@ -61,7 +61,6 @@ public static class LocalizationBuilderExtensions
             );
         }
 
-        string baseNamespace = Path.GetFileNameWithoutExtension(path).Trim().ToLowerInvariant();
         IDictionary<string, IDictionary<string, string>> deserializedYaml =
             YamlDictionariesDeserializer.FromString(contents);
 
@@ -71,11 +70,11 @@ public static class LocalizationBuilderExtensions
         {
             string? name =
                 (localizedStrings.Key is null || localizedStrings.Key == "default")
-                    ? baseNamespace
+                    ? default
                     : localizedStrings.Key;
 
             builder.AddLocalization(
-                new LocalizationSet(name.ToLowerInvariant(), culture, localizedStrings.Value!)
+                new LocalizationSet(name?.ToLowerInvariant(), culture, localizedStrings.Value!)
             );
         }
 

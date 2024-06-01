@@ -29,7 +29,7 @@ public sealed class LocalizationBuilderTests
     {
         LocalizationBuilder builder = new();
 
-        _ = builder.FromResource<Test>(Assembly.GetExecutingAssembly(), new CultureInfo("en-US"));
+        _ = builder.FromResource<Test>(new CultureInfo("en-US"));
 
         ILocalizationProvider provider = builder.Build();
 

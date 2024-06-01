@@ -6,12 +6,12 @@
 namespace Lepo.i18n.Wpf.UnitTests;
 
 [CollectionDefinition("ExtensionsTests", DisableParallelization = true)]
-public sealed class StringLocalizerExtensionTests
+public sealed class PluralStringLocalizerExtensionTests
 {
     [Fact]
-    public void ProvideValue_ShouldReturnLocalizedText()
+    public void ProvideValue_ShouldReturnProperLocalizationPerCount()
     {
-        string provider = nameof(ProvideValue_ShouldReturnLocalizedText);
+        string provider = nameof(ProvideValue_ShouldReturnProperLocalizationPerCount);
         LocalizationProvider localizationProvider =
             new(
                 new CultureInfo("en-US"),
@@ -19,7 +19,11 @@ public sealed class StringLocalizerExtensionTests
                     new LocalizationSet(
                         default,
                         new CultureInfo("en-US"),
-                        new Dictionary<string, string> { { "Test", "Test value" } }!
+                        new Dictionary<string, string>
+                        {
+                            { "users.single", "There is only one user" },
+                            { "users.plural", "There are {0} users" }
+                        }!
                     )
                 ]
             );
@@ -27,9 +31,21 @@ public sealed class StringLocalizerExtensionTests
         LocalizationProviderFactory.SetInstance(localizationProvider, provider);
         LocalizationProviderFactory.GetInstance(provider)!.SetCulture(new CultureInfo("en-US"));
 
-        _ = new StringLocalizerExtension("Test") { ProviderKey = provider }
+        _ = new PluralStringLocalizerExtension(1, "users.single", "users.plural")
+        {
+            ProviderKey = provider
+        }
             .ProvideValue(null!)
             .Should()
-            .Be("Test value");
+            .Be("There is only one user");
+
+        LocalizationProviderFactory.SetInstance(localizationProvider);
+        _ = new PluralStringLocalizerExtension(4, "users.single", "users.plural")
+        {
+            ProviderKey = provider
+        }
+            .ProvideValue(null!)
+            .Should()
+            .Be("There are 4 users");
     }
 }

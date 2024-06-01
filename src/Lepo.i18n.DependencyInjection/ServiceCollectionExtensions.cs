@@ -28,8 +28,9 @@ public static class ServiceCollectionExtensions
         LocalizationProviderFactory.SetInstance(builder.Build());
 
         _ = services.AddSingleton(_ => LocalizationProviderFactory.GetInstance()!);
+        _ = services.AddTransient<IStringLocalizerFactory, ProviderBasedStringLocalizerFactory>();
         _ = services.AddTransient<ILocalizationCultureManager, LocalizationCultureManager>();
-        _ = services.AddTransient<IStringLocalizer, StaticStringLocalizer>();
+        _ = services.AddTransient<IStringLocalizer, ProviderBasedStringLocalizer>();
 
         return services;
     }
