@@ -1,0 +1,53 @@
+{
+  "version": "1.0",
+  "strings": [
+    {
+      "name": "Test",
+      "value": "Text in english"
+    },
+    {
+      "name": "Titele",
+      "value": "WPF UI - Galery"
+    },
+    {
+      "name": "Lan",
+      "value": "Language"
+    },
+    {
+      "name": "Menu.Settings",
+      "value": "Settings"
+    },
+    {
+      "name": "Menu.Dashboard",
+      "value": "Dashboard"
+    },
+    {
+      "name": "Menu.Data",
+      "value": "Data"
+    },
+    {
+      "name": "Menu.Search",
+      "value": "Search"
+    },
+    {
+      "name": "Setting.Personalization",
+      "value": "Personalization"
+    },
+    {
+      "name": "Setting.Theme",
+      "value": "Theme"
+    },
+    {
+      "name": "Setting.Theme.Light",
+      "value": "Light"
+    },
+    {
+      "name": "Setting.Theme.Dark",
+      "value": "Dark"
+    },
+    {
+      "name": "Dashboard.Click",
+      "value": "ClickMe !"
+    }
+  ]
+}

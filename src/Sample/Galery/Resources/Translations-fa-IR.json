@@ -1,0 +1,53 @@
+{
+  "version": "1.0",
+  "strings": [
+    {
+      "name": "Test",
+      "value": "متن برای فارسی"
+    },
+    {
+      "name": "Titele",
+      "value": "WPF UI - گالری "
+    },
+    {
+      "name": "Lan",
+      "value": "زبان سیستم"
+    },
+    {
+      "name": "Menu.Settings",
+      "value": "تنظیمات"
+    },
+    {
+      "name": "Menu.Dashboard",
+      "value": "داشبورد"
+    },
+    {
+      "name": "Menu.Data",
+      "value": "دیتا"
+    },
+    {
+      "name": "Menu.Search",
+      "value": "جستجو"
+    },
+    {
+      "name": "Setting.Personalization",
+      "value": "شخصی سازی"
+    },
+    {
+      "name": "Setting.Theme.Light",
+      "value": "روز"
+    },
+    {
+      "name": "Setting.Theme",
+      "value": "تم قالب"
+    },
+    {
+      "name": "Setting.Theme.Dark",
+      "value": "شب"
+    },
+    {
+      "name": "Dashboard.Click",
+      "value": "! کلیک کنید"
+    }
+  ]
+}
