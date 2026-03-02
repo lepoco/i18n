@@ -12,28 +12,27 @@ public sealed class PluralStringLocalizerExtensionTests
     public void ProvideValue_ShouldReturnProperLocalizationPerCount()
     {
         string provider = nameof(ProvideValue_ShouldReturnProperLocalizationPerCount);
-        LocalizationProvider localizationProvider =
-            new(
-                new CultureInfo("en-US"),
-                [
-                    new LocalizationSet(
-                        default,
-                        new CultureInfo("en-US"),
-                        new Dictionary<string, string>
-                        {
-                            { "users.single", "There is only one user" },
-                            { "users.plural", "There are {0} users" }
-                        }!
-                    )
-                ]
-            );
+        LocalizationProvider localizationProvider = new(
+            new CultureInfo("en-US"),
+            [
+                new LocalizationSet(
+                    default,
+                    new CultureInfo("en-US"),
+                    new Dictionary<string, string>
+                    {
+                        { "users.single", "There is only one user" },
+                        { "users.plural", "There are {0} users" },
+                    }!
+                ),
+            ]
+        );
 
         LocalizationProviderFactory.SetInstance(localizationProvider, provider);
         LocalizationProviderFactory.GetInstance(provider)!.SetCulture(new CultureInfo("en-US"));
 
         _ = new PluralStringLocalizerExtension(1, "users.single", "users.plural")
         {
-            ProviderKey = provider
+            ProviderKey = provider,
         }
             .ProvideValue(null!)
             .Should()
@@ -42,7 +41,7 @@ public sealed class PluralStringLocalizerExtensionTests
         LocalizationProviderFactory.SetInstance(localizationProvider);
         _ = new PluralStringLocalizerExtension(4, "users.single", "users.plural")
         {
-            ProviderKey = provider
+            ProviderKey = provider,
         }
             .ProvideValue(null!)
             .Should()

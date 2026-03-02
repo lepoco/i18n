@@ -12,17 +12,16 @@ public sealed class StringLocalizerExtensionTests
     public void ProvideValue_ShouldReturnLocalizedText()
     {
         string provider = nameof(ProvideValue_ShouldReturnLocalizedText);
-        LocalizationProvider localizationProvider =
-            new(
-                new CultureInfo("en-US"),
-                [
-                    new LocalizationSet(
-                        default,
-                        new CultureInfo("en-US"),
-                        new Dictionary<string, string> { { "Test", "Test value" } }!
-                    )
-                ]
-            );
+        LocalizationProvider localizationProvider = new(
+            new CultureInfo("en-US"),
+            [
+                new LocalizationSet(
+                    default,
+                    new CultureInfo("en-US"),
+                    new Dictionary<string, string> { { "Test", "Test value" } }!
+                ),
+            ]
+        );
 
         LocalizationProviderFactory.SetInstance(localizationProvider, provider);
         LocalizationProviderFactory.GetInstance(provider)!.SetCulture(new CultureInfo("en-US"));

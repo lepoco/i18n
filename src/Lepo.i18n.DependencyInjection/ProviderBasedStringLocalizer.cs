@@ -29,7 +29,8 @@ public class ProviderBasedStringLocalizer(
     {
         return localizations
                 .GetLocalizationSet(cultureManager.GetCulture(), default)
-                ?.Strings.Select(x => new LocalizedString(x.Key, x.Value ?? x.Key)) ?? [];
+                ?.Strings.Select(x => new LocalizedString(x.Key, x.Value ?? x.Key))
+            ?? [];
     }
 
     /// <summary>

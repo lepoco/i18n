@@ -1,20 +1,18 @@
 <Project Sdk="Microsoft.NET.Sdk">
-
   <PropertyGroup>
-    <TargetFrameworks>net472;net8.0</TargetFrameworks>
+    <TargetFrameworks>net10.0;net472</TargetFrameworks>
     <IsPackable>false</IsPackable>
     <IsTestProject>true</IsTestProject>
     <IsTrimmable>false</IsTrimmable>
   </PropertyGroup>
 
-  
   <ItemGroup>
     <None Remove="Resources\Translations-pl-PL.yaml" />
     <None Remove="Resources\Translations-en-US.yaml" />
   </ItemGroup>
- 
+
   <ItemGroup>
-    <PackageReference Include="FluentAssertions" />
+    <PackageReference Include="AwesomeAssertions" />
     <PackageReference Include="Microsoft.Extensions.DependencyInjection" />
     <PackageReference Include="NSubstitute" />
     <PackageReference Include="Microsoft.NET.Test.Sdk" />
@@ -32,5 +30,4 @@
   <ItemGroup>
     <ProjectReference Include="..\..\src\Lepo.i18n.DependencyInjection\Lepo.i18n.DependencyInjection.csproj" />
   </ItemGroup>
-
 </Project>

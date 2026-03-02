@@ -19,7 +19,7 @@ public sealed class TranslatorTests
             new Dictionary<string, string>
             {
                 { "pl_PL", "Lepo.i18n.UnitTests.Resources.Translations-pl-PL.yaml" },
-                { "en_US", "Lepo.i18n.UnitTests.Resources.Translations-en-US.yaml" }
+                { "en_US", "Lepo.i18n.UnitTests.Resources.Translations-en-US.yaml" },
             }
         );
 
@@ -39,7 +39,7 @@ public sealed class TranslatorTests
             new Dictionary<string, string>
             {
                 { "pl_PL", typeof(Test).FullName },
-                { "en_US", typeof(Test).FullName }
+                { "en_US", typeof(Test).FullName },
             }
         );
 

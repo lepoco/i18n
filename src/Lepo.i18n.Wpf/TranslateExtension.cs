@@ -27,7 +27,6 @@ public class TranslateExtension : MarkupExtension
     /// Initializes a new instance of the <see cref="TranslateExtension"/> class with the specified text.
     /// </summary>
     /// <param name="text">The text to be localized.</param>
-
     public TranslateExtension(string? text)
     {
         String = EscapeText(text);
@@ -39,7 +38,6 @@ public class TranslateExtension : MarkupExtension
     /// <param name="text">The text to be localized.</param>
     /// <param name="plural">The plural text to be localized.</param>
     /// <param name="number">The number that determines whether to use the singular or plural form of the text.</param>
-
     public TranslateExtension(string? text, string? plural, object number)
     {
         String = EscapeText(text);

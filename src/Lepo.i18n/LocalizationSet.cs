@@ -32,4 +32,21 @@ public record LocalizationSet(
             return key;
         }
     }
+
+    public string Format(string key, params object?[]? args)
+    {
+        string? value = this[key];
+
+        if (args is null || args.Length == 0)
+        {
+            return value ?? key;
+        }
+
+        if (value is null)
+        {
+            return string.Format(key, args);
+        }
+
+        return string.Format(value, args);
+    }
 }

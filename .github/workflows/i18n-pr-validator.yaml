@@ -20,16 +20,16 @@ jobs:
         with:
           nuget-api-key: ${{ secrets.NUGET_API_KEY }}
 
-      - name: Setup .NET Core SDK 8.x
+      - name: Setup .NET Core SDK 10.x
         uses: actions/setup-dotnet@v4
         with:
-          dotnet-version: 8.x
+          dotnet-version: 10.x
 
       - name: Install dependencies
         run: dotnet restore
 
       - name: Build
-        run: dotnet build Lepo.i18n.sln --configuration Release --no-restore
+        run: dotnet build Lepo.i18n.slnx --configuration Release --no-restore
 
       - name: Run tests
-        run: dotnet test Lepo.i18n.sln --configuration Release --no-restore --no-build --verbosity quiet
+        run: dotnet test Lepo.i18n.slnx --configuration Release --no-restore --no-build --verbosity quiet

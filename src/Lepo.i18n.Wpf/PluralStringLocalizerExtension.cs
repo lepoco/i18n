@@ -12,7 +12,6 @@ namespace Lepo.i18n.Wpf;
 /// This class extends <see cref="MarkupExtension"/> and overrides the <see cref="ProvideValue"/> method to return localized strings.
 /// It uses the <see cref="Count"/> property to determine whether to use the singular or plural form of the text.
 /// </remarks>
-
 [ContentProperty(nameof(Count))]
 [MarkupExtensionReturnType(typeof(int))]
 public class PluralStringLocalizerExtension : MarkupExtension

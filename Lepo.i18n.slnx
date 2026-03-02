@@ -1,0 +1,24 @@
+<Solution>
+	<Folder Name="/Samples/">
+		<Project Path="samples/Lepo.i18n.Sample.Wpf/Lepo.i18n.Sample.Wpf.csproj" />
+	</Folder>
+	<Folder Name="/Solution Items/">
+		<File Path=".editorconfig" />
+		<File Path="Directory.Build.props" />
+		<File Path="Directory.Build.targets" />
+		<File Path="Directory.Packages.props" />
+		<File Path="nuget.config" />
+		<File Path="README.md" />
+		<File Path="ThirdPartyNotices.txt" />
+	</Folder>
+	<Folder Name="/Tests/">
+		<Project Path="tests/Lepo.i18n.DependencyInjection.UnitTests/Lepo.i18n.DependencyInjection.UnitTests.csproj" />
+		<Project Path="tests/Lepo.i18n.Json.UnitTests/Lepo.i18n.Json.UnitTests.csproj" />
+		<Project Path="tests/Lepo.i18n.UnitTests/Lepo.i18n.UnitTests.csproj" />
+		<Project Path="tests/Lepo.i18n.Wpf.UnitTests/Lepo.i18n.Wpf.UnitTests.csproj" />
+	</Folder>
+	<Project Path="src/Lepo.i18n.DependencyInjection/Lepo.i18n.DependencyInjection.csproj" />
+	<Project Path="src/Lepo.i18n.Json/Lepo.i18n.Json.csproj" />
+	<Project Path="src/Lepo.i18n.Wpf/Lepo.i18n.Wpf.csproj" />
+	<Project Path="src/Lepo.i18n/Lepo.i18n.csproj" />
+</Solution>

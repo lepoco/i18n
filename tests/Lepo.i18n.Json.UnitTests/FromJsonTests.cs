@@ -5,7 +5,7 @@
 
 using System.Globalization;
 using System.Linq;
-using FluentAssertions;
+using AwesomeAssertions;
 using Xunit;
 
 namespace Lepo.i18n.Json.UnitTests;

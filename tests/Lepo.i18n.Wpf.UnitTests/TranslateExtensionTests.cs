@@ -13,21 +13,20 @@ public class TranslateExtensionTests
     public void ProvideValue_ShouldReturnProperLocalizationPerCount()
     {
         string provider = nameof(ProvideValue_ShouldReturnProperLocalizationPerCount);
-        LocalizationProvider localizationProvider =
-            new(
-                new CultureInfo("en-US"),
-                [
-                    new LocalizationSet(
-                        default,
-                        new CultureInfo("en-US"),
-                        new Dictionary<string, string>
-                        {
-                            { "users.single", "There is only one user" },
-                            { "users.plural", "There are {0} users" }
-                        }!
-                    )
-                ]
-            );
+        LocalizationProvider localizationProvider = new(
+            new CultureInfo("en-US"),
+            [
+                new LocalizationSet(
+                    default,
+                    new CultureInfo("en-US"),
+                    new Dictionary<string, string>
+                    {
+                        { "users.single", "There is only one user" },
+                        { "users.plural", "There are {0} users" },
+                    }!
+                ),
+            ]
+        );
 
         LocalizationProviderFactory.SetInstance(localizationProvider, provider);
         LocalizationProviderFactory.GetInstance(provider)!.SetCulture(new CultureInfo("en-US"));

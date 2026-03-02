@@ -15,13 +15,12 @@ namespace Lepo.i18n.Json;
 /// </summary>
 public static class LocalizationBuilderExtensions
 {
-    private static readonly JsonSerializerOptions DefaultJsonSerializerOptions =
-        new()
-        {
-            PropertyNameCaseInsensitive = true,
-            AllowTrailingCommas = true,
-            Converters = { new TranslationsContainerConverter() }
-        };
+    private static readonly JsonSerializerOptions DefaultJsonSerializerOptions = new()
+    {
+        PropertyNameCaseInsensitive = true,
+        AllowTrailingCommas = true,
+        Converters = { new TranslationsContainerConverter() },
+    };
 
     public static LocalizationBuilder FromJsonString(
         this LocalizationBuilder builder,
@@ -106,12 +105,12 @@ public static class LocalizationBuilderExtensions
             throw new ArgumentNullException(nameof(contents));
         }
 
-        Version schemaVersion =
-            new(
-                JsonSerializer
-                    .Deserialize<ITranslationsContainer>(contents, DefaultJsonSerializerOptions)
-                    ?.Version ?? "1.0.0"
-            );
+        Version schemaVersion = new(
+            JsonSerializer
+                .Deserialize<ITranslationsContainer>(contents, DefaultJsonSerializerOptions)
+                ?.Version
+                ?? "1.0.0"
+        );
 
         if (!schemaVersion.Major.Equals(1))
         {

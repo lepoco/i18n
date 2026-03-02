@@ -3,6 +3,8 @@
 // Copyright (C) Leszek Pomianowski and Lepo.i18n Contributors.
 // All Rights Reserved.
 
+using System.Collections.Generic;
+
 namespace Lepo.i18n.Wpf;
 
 /// <summary>
@@ -43,7 +45,11 @@ public class StringLocalizerExtension : MarkupExtension
     /// <summary>
     /// Gets or sets the text to be localized.
     /// </summary>
-    public string? Text { get; set; }
+    public string? Text
+    {
+        get;
+        set => field = EscapeText(value);
+    }
 
     /// <summary>
     /// Gets or sets the namespace of the text to be localized.
@@ -54,6 +60,31 @@ public class StringLocalizerExtension : MarkupExtension
     /// Provider key.
     /// </summary>
     public string ProviderKey { get; set; } = string.Empty;
+
+    /// <summary>
+    /// Optional argument 1 for string formatting.
+    /// </summary>
+    public object? Arg { get; set; } = null;
+
+    /// <summary>
+    /// Optional argument 2 for string formatting.
+    /// </summary>
+    public object? Arg2 { get; set; } = null;
+
+    /// <summary>
+    /// Optional argument 3 for string formatting.
+    /// </summary>
+    public object? Arg3 { get; set; } = null;
+
+    /// <summary>
+    /// Optional argument 4 for string formatting.
+    /// </summary>
+    public object? Arg4 { get; set; } = null;
+
+    /// <summary>
+    /// Optional argument 5 for string formatting.
+    /// </summary>
+    public object? Arg5 { get; set; } = null;
 
     /// <summary>
     /// Returns a localized string for the <see cref="Text"/> property.
@@ -71,7 +102,7 @@ public class StringLocalizerExtension : MarkupExtension
             LocalizationProviderFactory.GetInstance(ProviderKey)?.GetCulture()
             ?? CultureInfo.CurrentUICulture;
 
-        string? selectedNamespace = Namespace?.ToLowerInvariant() ?? default;
+        string? selectedNamespace = Namespace?.ToLowerInvariant() ?? null;
 
         LocalizationSet? localizationSet = LocalizationProviderFactory
             .GetInstance(ProviderKey)
@@ -82,7 +113,39 @@ public class StringLocalizerExtension : MarkupExtension
             return Text;
         }
 
-        return localizationSet.Strings.FirstOrDefault(s => s.Key == Text).Value ?? Text;
+        List<object?>? args = null;
+
+        if (Arg is not null)
+        {
+            args ??= new List<object?>();
+            args.Add(Arg);
+        }
+
+        if (Arg2 is not null)
+        {
+            args ??= new List<object?>();
+            args.Add(Arg2);
+        }
+
+        if (Arg3 is not null)
+        {
+            args ??= new List<object?>();
+            args.Add(Arg3);
+        }
+
+        if (Arg4 is not null)
+        {
+            args ??= new List<object?>();
+            args.Add(Arg4);
+        }
+
+        if (Arg5 is not null)
+        {
+            args ??= new List<object?>();
+            args.Add(Arg5);
+        }
+
+        return localizationSet.Format(Text, args?.ToArray() ?? null);
     }
 
     /// <summary>

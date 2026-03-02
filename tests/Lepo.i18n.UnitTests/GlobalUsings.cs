@@ -7,5 +7,5 @@ global using System;
 global using System.Globalization;
 global using System.Linq;
 global using System.Reflection;
-global using FluentAssertions;
+global using AwesomeAssertions;
 global using Xunit;

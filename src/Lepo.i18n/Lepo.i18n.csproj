@@ -1,8 +1,7 @@
 <Project Sdk="Microsoft.NET.Sdk">
-
   <PropertyGroup>
     <PackageId>Lepo.i18n</PackageId>
-    <TargetFrameworks>netstandard2.0;netstandard2.1;net462;net6.0;net8.0</TargetFrameworks>
+    <TargetFrameworks>net10.0;net8.0;netstandard2.0;netstandard2.1;net462;net472;net481</TargetFrameworks>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
     <CommonTags>$(CommonTags);yaml;serialization</CommonTags>
     <Description>Lepo.i18n is an essential tool for developers aiming to create multilingual applications in WPF, WinForms, or CLI environments.</Description>
@@ -24,5 +23,4 @@
       System.Runtime.CompilerServices.SkipLocalsInitAttribute;
     </PolySharpIncludeGeneratedTypes>
   </PropertyGroup>
-
 </Project>

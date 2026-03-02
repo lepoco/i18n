@@ -11,9 +11,12 @@
                                      IsDesignTimeCreatable=False}"
     d:DesignHeight="450"
     d:DesignWidth="800"
-    mc:Ignorable="d">
-
+    mc:Ignorable="d"
+>
     <Grid Margin="0,0,0,24">
-        <TextBlock x:Name="TestTextBlock" Text="{i18n:StringLocalizer 'Test'}" />
+        <TextBlock
+            x:Name="TestTextBlock"
+            Text="{i18n:StringLocalizer 'Test {0}, of {1}', Arg='What?', Arg2='No'}"
+        />
     </Grid>
 </Page>
